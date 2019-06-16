@@ -20,7 +20,7 @@ namespace Game
             tileset = new Tileset(LoadTileset(11, "img/tileset/Level1/tileset_lvl1_"));
             tilemap = new Tilemap(tilemapCol, tilemapRow, 32, tileset, "img/tileset/background_lvl1.png");
             SetMap();
-            player = PlayerFactory.CreatePlayer(new Vector2D(400, 300));
+            player = PlayerFactory.CreatePlayer(new Vector2D(400, 5), tilemap);
         }
 
         private void SetMap()

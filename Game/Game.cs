@@ -213,13 +213,20 @@ namespace Game
 
         public static Texture GetTexture(string path)
         {
-            if (textures.ContainsKey(path))
-                return textures[path];
-            else
+            try
             {
-                var tex = new Texture(path);
-                textures.Add(path, tex);
-                return tex;
+                if (textures.ContainsKey(path))
+                    return textures[path];
+                else
+                {
+                    var tex = new Texture(path);
+                    textures.Add(path, tex);
+                    return tex;
+                }
+            }
+            catch
+            {
+                return new Texture(@"img\utils\default.png");
             }
         }
 

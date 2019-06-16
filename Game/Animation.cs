@@ -9,20 +9,23 @@ namespace Game
 {
     public class Animation
     {
-        private List<Texture> sprites;
+        private List<string> sprites;
         private float speed = 0.05f;
         private bool isLoop;
         private int indexAnim;
         private float animTimer;
-        private Texture sprite;
+        private string sprite;
 
-        public List<Texture> Sprites { get => sprites; set => sprites = value; }
+        public List<string> Sprites { get => sprites; set => sprites = value; }
         public float Speed { get => speed; set => speed = value; }
         public bool IsLoop { get => isLoop; set => isLoop = value; }
         public float AnimTimer { get => animTimer; set => animTimer = value; }
+        public string Sprite { get => sprite; set => sprite = value; }
 
-        public Animation(string path)
+        public Animation(string path, bool isLoop)
         {
+            sprites = new List<string>();
+            this.isLoop = isLoop;
             LoadTextures(path);
         }
 
@@ -34,12 +37,12 @@ namespace Game
             {
                 foreach (FileInfo file in myDir.GetFiles())
                 {
-                    sprites.Add(Engine.GetTexture(file.FullName));
+                    sprites.Add(file.FullName);
                 }
             }
             else
             {
-                sprites.Add(Engine.GetTexture(myDir.GetFiles()[0].FullName));
+                sprites.Add(myDir.GetFiles()[0].FullName);
             }
         }
 
@@ -52,11 +55,11 @@ namespace Game
                     if (indexAnim >= Sprites.Count)
                     {
                         indexAnim = 0;
-                        sprite = Sprites[indexAnim];
+                        Sprite = Sprites[indexAnim];
                     }
                     else
                     {
-                        sprite = Sprites[indexAnim];
+                        Sprite = Sprites[indexAnim];
                         indexAnim++;
                     }
                 }
@@ -64,11 +67,11 @@ namespace Game
                 {
                     if (indexAnim >= Sprites.Count)
                     {
-                        sprite = Sprites[Sprites.Count - 1];
+                        Sprite = Sprites[Sprites.Count - 1];
                     }
                     else
                     {
-                        sprite = Sprites[indexAnim];
+                        Sprite = Sprites[indexAnim];
                         indexAnim++;
                     }
                 }

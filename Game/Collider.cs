@@ -40,18 +40,21 @@ namespace Game
         float offsetx;
         float offsety;
 
-        protected float sizeX { get; private set; }
-        protected float sizeY { get; private set; }
+        float sizeX;
+        float sizeY;
+
         public float X { get => x; set => x = value; }
         public float Y { get => y; set => y = value; }
+        public float SizeX { get => sizeX; set => sizeX = value; }
+        public float SizeY { get => sizeY; set => sizeY = value; }
 
         public Collider(float x, float y, float sizeX, float sizeY, float offsetx, float offsety, bool isCollisionable, bool isCircle)
         {
             this.offsetx = offsetx;
             this.offsety = offsety;
 
-            this.sizeX = sizeX;
-            this.sizeY = sizeY;
+            this.SizeX = sizeX;
+            this.SizeY = sizeY;
 
             this.X = x;
             this.Y = y;
@@ -72,13 +75,13 @@ namespace Game
 
         private static bool CheckBoxBoxCollision(Collider collisionBox1, Collider collisionBox2)
         {
-            bool collisionMaxX = (collisionBox1.X - collisionBox1.offsetx + collisionBox1.sizeX) > collisionBox2.X - collisionBox2.offsetx;
-            bool collisionMinX = (collisionBox1.X - collisionBox1.offsetx) < (collisionBox2.X - collisionBox2.offsetx + collisionBox2.sizeX);
+            bool collisionMaxX = (collisionBox1.X - collisionBox1.offsetx + collisionBox1.SizeX) > collisionBox2.X - collisionBox2.offsetx;
+            bool collisionMinX = (collisionBox1.X - collisionBox1.offsetx) < (collisionBox2.X - collisionBox2.offsetx + collisionBox2.SizeX);
 
             bool collisionX = collisionMaxX && collisionMinX;
 
-            bool collisionMaxY = (collisionBox1.Y - collisionBox1.offsety + collisionBox1.sizeY) > collisionBox2.Y - collisionBox2.offsety;
-            bool collisionMinY = (collisionBox1.Y - collisionBox1.offsety) < (collisionBox2.Y - collisionBox2.offsety + collisionBox2.sizeY);
+            bool collisionMaxY = (collisionBox1.Y - collisionBox1.offsety + collisionBox1.SizeY) > collisionBox2.Y - collisionBox2.offsety;
+            bool collisionMinY = (collisionBox1.Y - collisionBox1.offsety) < (collisionBox2.Y - collisionBox2.offsety + collisionBox2.SizeY);
 
             bool collisionY = collisionMaxY && collisionMinY;
 
@@ -88,8 +91,8 @@ namespace Game
         private static bool CheckBoxCircleCollision(Collider collisionCircle, Collider collisionBox)
         {
 
-            float deltaX = (collisionCircle.X) - Math.Max(collisionBox.X - collisionBox.offsetx, Math.Min(collisionCircle.X, collisionBox.X - collisionBox.offsetx + collisionBox.sizeX));
-            float deltaY = (collisionCircle.Y) - Math.Max(collisionBox.Y - collisionBox.offsety, Math.Min(collisionCircle.Y, collisionBox.Y - collisionBox.offsety + collisionBox.sizeY));
+            float deltaX = (collisionCircle.X) - Math.Max(collisionBox.X - collisionBox.offsetx, Math.Min(collisionCircle.X, collisionBox.X - collisionBox.offsetx + collisionBox.SizeX));
+            float deltaY = (collisionCircle.Y) - Math.Max(collisionBox.Y - collisionBox.offsety, Math.Min(collisionCircle.Y, collisionBox.Y - collisionBox.offsety + collisionBox.SizeY));
 
 
             return Math.Pow(deltaX, 2) + Math.Pow(deltaY, 2) < Math.Pow(collisionCircle.radius, 2);
@@ -97,7 +100,7 @@ namespace Game
 
         private static bool CheckCircleCircleCollision(Collider collisionCircle1, Collider collisionCircle2)
         {
-            var radius = collisionCircle1.sizeX / 2 + collisionCircle2.sizeX / 2;
+            var radius = collisionCircle1.SizeX / 2 + collisionCircle2.SizeX / 2;
             var deltaX = collisionCircle1.X - collisionCircle2.X;
             var deltaY = collisionCircle1.Y - collisionCircle2.Y;
             return Math.Pow(deltaX, 2) + Math.Pow(deltaY, 2) <= Math.Pow(radius, 2);

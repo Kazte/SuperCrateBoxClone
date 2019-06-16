@@ -8,9 +8,11 @@ namespace Game
 {
     public static class PlayerFactory
     {
-        public static Player CreatePlayer(Vector2D position)
+        public static Player CreatePlayer(Vector2D position, Tilemap tilemap)
         {
-            return new Player("img/sprites/player/player_idle1.png", position, 0, 16, 16);
+            Player player = new Player("img/sprites/player/player_idle1.png", position, 0, 16, 16);
+            player.Tilemap = tilemap;
+            return player;
         }
     }
 }
