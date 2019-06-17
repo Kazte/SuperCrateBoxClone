@@ -14,8 +14,12 @@ namespace Game
         Tilemap tilemap;
 
         Player player;
+        public Level1()
+        {
+            ResetLevel(25, 19);
+        }
 
-        public Level1(int tilemapRow, int tilemapCol)
+        public void ResetLevel(int tilemapRow, int tilemapCol)
         {
             tileset = new Tileset(LoadTileset(11, "img/tileset/Level1/tileset_lvl1_"));
             tilemap = new Tilemap(tilemapCol, tilemapRow, 32, tileset, "img/tileset/background_lvl1.png");
@@ -40,6 +44,7 @@ namespace Game
                 }
             }
             tilemap.Initialize();
+            Program.Enemies.Add(new Enemy(new Vector2D(200, 350), 0));
         }
 
         private static List<Tile> LoadTileset(int tilesetSize, string initialPath)
@@ -58,12 +63,34 @@ namespace Game
         {
             tilemap.Render();
             player.Render();
+            for (int i = 0; i < Program.Enemies.Count; i++)
+            {
+                Program.Enemies[i].Render();
+            }
+
+            // Actualizo las balas recorriendo la lista 
+            // (Si no disparo no hay ninguna bala, y las balas se van quitando a medida que se destruyen)
+            for (int i = 0; i < Program.Bullets.Count; i++)
+            {
+                Program.Bullets[i].Render();
+            }
         }
 
         public void Update()
         {
             tileset.Update();
             player.Update();
+            for (int i = 0; i < Program.Enemies.Count; i++)
+            {
+                Program.Enemies[i].Update();
+            }
+
+            // Actualizo las balas recorriendo la lista 
+            // (Si no disparo no hay ninguna bala, y las balas se van quitando a medida que se destruyen)
+            for (int i = 0; i < Program.Bullets.Count; i++)
+            {
+                Program.Bullets[i].Update();
+            }
         }
 
     }

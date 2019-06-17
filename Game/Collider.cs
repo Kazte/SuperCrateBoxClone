@@ -68,7 +68,7 @@ namespace Game
 
         }
 
-        public Collider getCollider()
+        public Collider GetCollider()
         {
             return this;
         }

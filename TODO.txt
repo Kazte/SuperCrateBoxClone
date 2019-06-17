@@ -1,0 +1,3 @@
+Terminar colisiones entre bala y tile
+Pool de enemigos, IA y Generación
+Agregar contador.

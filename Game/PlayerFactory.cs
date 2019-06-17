@@ -10,7 +10,7 @@ namespace Game
     {
         public static Player CreatePlayer(Vector2D position, Tilemap tilemap)
         {
-            Player player = new Player("img/sprites/player/player_idle1.png", position, 0, 16, 16);
+            Player player = new Player("img/sprites/player/player_idle1.png", position, 0, 32, 32);
             player.Tilemap = tilemap;
             return player;
         }

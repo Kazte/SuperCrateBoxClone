@@ -38,17 +38,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Animation.cs" />
+    <Compile Include="Bullet.cs" />
     <Compile Include="Collider.cs" />
     <Compile Include="CustomDelegates.cs" />
+    <Compile Include="Enemy.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameObject.cs" />
+    <Compile Include="Gun.cs" />
     <Compile Include="Interfaces\IGun.cs" />
     <Compile Include="Interfaces\IRenderizable.cs" />
     <Compile Include="Interfaces\IUpdateable.cs" />
     <Compile Include="Level1.cs" />
+    <Compile Include="Pistol.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerFactory.cs" />
+    <Compile Include="PoolBullets.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="Tilemap.cs" />
@@ -56,6 +61,7 @@
     <Compile Include="TitleScreen.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Vector2D.cs" />
+    <Compile Include="WeaponFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Engine.dll">
@@ -227,6 +233,39 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="img\utils\pixel.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\weapons\bullet.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\weapons\weapon_-1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\weapons\weapon_-2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\weapons\weapon_-3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\weapons\weapon_-4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\weapons\weapon_-5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\weapons\weapon_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\weapons\weapon_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\weapons\weapon_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\weapons\weapon_4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\weapons\weapon_5.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ship.png">

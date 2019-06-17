@@ -9,23 +9,19 @@ namespace Game
 {
     public class Player : GameObject, IRenderizable, IUpdateable
     {
+        int move;
+
         float xoffset;
         float yoffset;
 
         float xspd;
         float yspd;
-        int move;
+
+
         float speed = 150;
+        float yspdMax = 30;
 
-        float xspdMax = 700;
-        float yspdMax = 90;
-
-        float accGround = 70;
-        float fricGround = 500;
-        float accAir = 0.2f;
-        float fricAir = 0.5f;
-
-        int jumpForce = 800000;
+        int jumpForce = 30;
 
         int face = 1;
 
@@ -33,14 +29,18 @@ namespace Game
 
         bool ground;
         bool isSpacePressed;
+        bool jumping;
 
-        float accTemp;
-        float fricTemp;
 
-        private IGun activeGun;
+        private PoolBullets bulletsPool = new PoolBullets();
+        private Gun activeGun;
+
+        bool isShoot;
+        bool isReload;
+        float timerShoot;
+        float timeToShoot = 0.2f;
 
         Tilemap tilemap;
-
         Collider collider;
 
         Dictionary<StateMachine, Animation> animations = new Dictionary<StateMachine, Animation>();
@@ -51,7 +51,7 @@ namespace Game
         public Collider Collider { get => collider; set => collider = value; }
         public Tilemap Tilemap { get => tilemap; set => tilemap = value; }
 
-        int factor = 5;
+        int factor = 10;
 
         public Player(string initialSprite, Vector2D position, float angle, float xoffset, float yoffset) : base(position, angle)
         {
@@ -61,7 +61,7 @@ namespace Game
             collider =  new Collider(position.X, position.Y, 16, 16, xoffset, yoffset, true, false);
             LoadAnimation();
             currentAnimation = animations[StateMachine.idle_right];
-
+            activeGun = Program.weapons["pistol"];
         }
 
         private void LoadAnimation()
@@ -77,44 +77,41 @@ namespace Game
 
         void Movement()
         {
+            Gravity();
+            CollisionTop();
 
-            
 
-            if (TileID(position.X + factor, position.Y + collider.SizeY) != -1 || TileID(position.X + collider.SizeX - factor, position.Y + collider.SizeY) != -1)
+            if (TileID(position.X - collider.SizeX + 4, position.Y + collider.SizeY) != -1 || TileID(position.X + collider.SizeX - 4, position.Y + collider.SizeY) != -1)
             {
                 ground = true;
+                jumping = false;
             }
             else
             {
                 ground = false;
             }
 
-            accTemp = ground ? accGround : accAir;
-            fricTemp = ground ? fricGround : fricAir;
-
-
             if (!ground)
             {
                 yspd = Utils.Focus(yspd, yspdMax, gravity);
             }
-
 
             if (Engine.GetKey(Keys.SPACE))
             {
                 if (!isSpacePressed && ground)
                 {
                     isSpacePressed = true;
+                    jumping = true;
                     yspd -= jumpForce;
-                    Engine.Debug("sd");
                 }
             }
             else
             {
                 isSpacePressed = false;
-                //if (!ground)
-                //{
-                //    yspd = Utils.Focus(yspd, yspdMax, gravity * .8f);
-                //}
+                if (!ground && jumping && yspd < 10)
+                {
+                    yspd = Utils.Focus(yspd, yspdMax, gravity * 2);
+                }
             }
 
             if (Engine.GetKey(Keys.RIGHT))
@@ -136,13 +133,14 @@ namespace Game
 
             xspd = move * Program.DTime * speed;
 
-            Gravity();
-            CollisionTop();
+            
+            
+            //Engine.Debug(jumping);
             //Engine.Debug(String.Format("xSpd: {0}, ySpd: {1}\nMove: {2}\nGround: {3}", xspd, yspd, move, ground));
         }
 
 
-        void ChangeGun(IGun newGun)
+        void ChangeGun(Gun newGun)
         {
             activeGun = newGun;
         }
@@ -152,6 +150,8 @@ namespace Game
         public void Render()
         {
             Engine.Draw(Sprite, Position, 1, 1, angle, 16, 16);
+            activeGun.Render();
+            activeGun.Face = face;
             currentAnimation.Animator();
             Sprite = currentAnimation.Sprite;
         }
@@ -160,16 +160,70 @@ namespace Game
         {
             UpdateState();
             Movement();
+            Weapon();
+
             currentAnimation = animations[currentState];
 
             collider.X = Position.X;
             collider.Y = Position.Y;
+            activeGun.Update(position);
+        }
+
+        private void Weapon()
+        {
+            if (Engine.GetKey(Keys.Z))
+            {
+                activeGun.Reload();
+                isReload = true;
+            }
+            else
+            {
+                isReload = false;
+            }
+
+            if (Engine.GetKey(Keys.X))
+            {
+                Shoot();
+            }
+            else
+            {
+                isShoot = false;
+            }
+            timerShoot += Program.DTime;
+        }
+
+        private void Shoot()
+        {
+            if (activeGun.CurrentAmmo > 0 && timerShoot >= timeToShoot)
+            {
+                if (activeGun.Automatic)
+                {
+                    activeGun.Shoot();
+                    var bullet = bulletsPool.Get();
+                    bullet.Init(position.X, position.Y, face, activeGun.BulletSpeed);
+                }
+                else
+                {
+                    if (!isShoot)
+                    {
+                        activeGun.Shoot();
+                        var bullet = bulletsPool.Get();
+                        bullet.Init(position.X, position.Y, face, activeGun.BulletSpeed);
+                        isShoot = true;
+                    }
+                }
+            }
+            else
+            {
+                Engine.Debug("Out of Ammo");
+            }
+            
         }
 
         private void MoveRight()
         {
             for (int i = 0; i < Math.Abs(xspd); i++) { 
-                if (TileID(position.X + collider.SizeX, position.Y + factor) == -1 && TileID(position.X + collider.SizeX, position.Y - factor) == -1)
+                if (TileID(position.X + collider.SizeX, position.Y - collider.SizeY + factor) == -1 && TileID(position.X + collider.SizeX, position.Y + collider.SizeY - factor) == -1)
                 {
                     position.X += xspd;
                 }
@@ -185,7 +239,7 @@ namespace Game
         {
             for (int i = 0; i < Math.Abs(xspd); i++)
             {
-                if (TileID(position.X, position.Y + factor) == -1 && TileID(position.X, position.Y + collider.SizeY - factor) == -1)
+                if (TileID(position.X - collider.SizeX, position.Y - collider.SizeY + factor) == -1 && TileID(position.X - collider.SizeX, position.Y + collider.SizeY - factor) == -1)
                 {
                     position.X += xspd;
                 }
@@ -201,10 +255,14 @@ namespace Game
         {
             for (int i = 0; i < Math.Abs(yspd); i++)
             {
-                if (TileID(position.X + factor, position.Y) != -1 || TileID(position.X + collider.SizeX - factor, position.Y) != -1)
+                
+                if (TileID(position.X + collider.SizeX - 5, position.Y - collider.SizeY - 6) != -1 || TileID(position.X - collider.SizeX + 5, position.Y - collider.SizeY - 6) != -1)
                 {
-                    yspd = 0;
-                    break;
+                    if (yspd < -2)
+                    {
+                        yspd = 0;
+                        break;
+                    }
                 }
             }
         }
@@ -213,16 +271,17 @@ namespace Game
         {
             for (int i = 0; i < Math.Abs(yspd); i++)
             {
-                if (TileID(position.X + factor, position.Y + collider.SizeY) != -1 || TileID(position.X + collider.SizeX - factor, position.Y + collider.SizeY) != -1)
+                if (yspd > 0)
                 {
-                    yspd = 0;
-                    break;
+                    if (TileID(position.X - collider.SizeX + 4, position.Y + collider.SizeY) != -1 || TileID(position.X + collider.SizeX - 4, position.Y + collider.SizeY) != -1)
+                    {
+                        yspd = 0;
+                        break;
+                    }
                 }
-                else
-                {
-                    position.Y += yspd * Program.DTime;
-                }
+                position.Y += yspd * Program.DTime;
             }
+            
         }
 
         private int TileID(float x, float y)
@@ -272,5 +331,6 @@ namespace Game
                 }
             }
         }
+
     }
 }

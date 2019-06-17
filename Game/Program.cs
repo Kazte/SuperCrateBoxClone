@@ -12,24 +12,30 @@ namespace Game
 
         // Time
         static float dTime;
+        static int timeSleep;
         static float timeLastFrame = 0;
         static DateTime timeInit = DateTime.Now;
         static int MS_PER_FRAME = 30;
         static TimeSpan timeSinceInit;
         static double timeElapsed;
 
+        // Weapons
+        public static Dictionary<string, Gun> weapons = new Dictionary<string, Gun>();
+        public static List<Bullet> Bullets { get; set; } = new List<Bullet>();
+        public static List<Enemy> Enemies { get; set; } = new List<Enemy>();
+
         public static float DTime { get => dTime; set => dTime = value; }
         public static int ScreenHeight { get => screenHeight; set => screenHeight = value; }
         public static int ScreenWidth { get => screenWidth; set => screenWidth = value; }
 
-        static Level1 level1 = new Level1(25, 19);
+        static Level1 level1;
 
         static void Main(string[] args)
         {
-            int timeSleep;
-            Engine.Initialize("Game", ScreenWidth, screenHeight);
+            
 
-
+            Initialize();
+            
 
             while(true)
             {
@@ -40,6 +46,19 @@ namespace Game
 
                 timeSleep = TimeSleep(start);
             }
+        }
+
+        private static void Initialize()
+        {
+            
+            Engine.Initialize("Game", ScreenWidth, screenHeight);
+            LoadWeapons();
+            level1 = new Level1();
+        }
+
+        private static void LoadWeapons()
+        {
+            weapons.Add("pistol", new Pistol(new Vector2D(0, 0), 0, 10, false, 600));
         }
 
         private static int TimeSleep(float start)
