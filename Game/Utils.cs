@@ -34,5 +34,10 @@ namespace Game
                 result = min;
             return result;
         }
+
+        internal static sbyte Focus(sbyte yspd, object yspdMax, object gravity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

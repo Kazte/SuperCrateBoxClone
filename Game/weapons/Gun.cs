@@ -18,6 +18,8 @@ namespace Game
 
         }
 
+        Bullet bullet;
+
         int maxAmmo;
         int currentAmmo;
         bool automatic;
@@ -33,6 +35,7 @@ namespace Game
         public bool Automatic { get => automatic; set => automatic = value; }
         public int Face { get => face; set => face = value; }
         public int BulletSpeed { get => bulletSpeed; set => bulletSpeed = value; }
+        public Bullet Bullet { get => bullet; set => bullet = value; }
 
         public void Reload()
         {
@@ -45,9 +48,9 @@ namespace Game
             
         }
 
-        public void Shoot()
+        public virtual void Shoot()
         {
-            currentAmmo--;
+            
 
         }
 

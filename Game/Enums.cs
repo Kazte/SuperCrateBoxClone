@@ -13,6 +13,15 @@ namespace Game
         walk_left,
         walk_right,
         jump_left,
-        jump_right
+        jump_right,
+        death_left,
+        death_right
+    }
+
+    enum Screen
+    {
+        main_menu,
+        level1,
+        game_over
     }
 }

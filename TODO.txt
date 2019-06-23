@@ -1,3 +1,2 @@
-Terminar colisiones entre bala y tile
-Pool de enemigos, IA y Generación
-Agregar contador.
+- Gestionar posicion de creacion de "Crates"
+- Colision y suma de puntos

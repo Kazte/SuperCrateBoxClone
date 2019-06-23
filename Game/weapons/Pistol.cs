@@ -14,6 +14,21 @@ namespace Game
 
         }
 
+        public override void Shoot()
+        {
+            CurrentAmmo--;
+            if (Face == 1)
+            {
+                Bullet.Init(position.X, position.Y, Face, BulletSpeed, 0);
+            }
+            else
+            {
+                Bullet.Init(position.X, position.Y, Face, BulletSpeed, 180);
+            }
+            
+            
+        }
+
         public override void Render()
         {
             if (Face == 1)

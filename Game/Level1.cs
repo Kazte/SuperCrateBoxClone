@@ -14,6 +14,10 @@ namespace Game
         Tilemap tilemap;
 
         Player player;
+
+        EnemyGenerator generator;
+        CrateGenerator crates;
+
         public Level1()
         {
             ResetLevel(25, 19);
@@ -25,6 +29,8 @@ namespace Game
             tilemap = new Tilemap(tilemapCol, tilemapRow, 32, tileset, "img/tileset/background_lvl1.png");
             SetMap();
             player = PlayerFactory.CreatePlayer(new Vector2D(400, 5), tilemap);
+            generator = new EnemyGenerator(tilemap, player);
+            crates = new CrateGenerator(tilemap, player);
         }
 
         private void SetMap()
@@ -44,7 +50,6 @@ namespace Game
                 }
             }
             tilemap.Initialize();
-            Program.Enemies.Add(new Enemy(new Vector2D(200, 350), 0));
         }
 
         private static List<Tile> LoadTileset(int tilesetSize, string initialPath)
@@ -62,17 +67,20 @@ namespace Game
         public void Render()
         {
             tilemap.Render();
+            new Text(GameMananger.Score + "", Program.ScreenWidth / 2, Program.ScreenHeight / 2).drawText();
             player.Render();
+
             for (int i = 0; i < Program.Enemies.Count; i++)
             {
                 Program.Enemies[i].Render();
             }
-
-            // Actualizo las balas recorriendo la lista 
-            // (Si no disparo no hay ninguna bala, y las balas se van quitando a medida que se destruyen)
             for (int i = 0; i < Program.Bullets.Count; i++)
             {
                 Program.Bullets[i].Render();
+            }
+            for (int i = 0; i < Program.Crates.Count; i++)
+            {
+                Program.Crates[i].Render();
             }
         }
 
@@ -80,16 +88,19 @@ namespace Game
         {
             tileset.Update();
             player.Update();
+            generator.Update();
+            crates.Update();
             for (int i = 0; i < Program.Enemies.Count; i++)
             {
                 Program.Enemies[i].Update();
             }
-
-            // Actualizo las balas recorriendo la lista 
-            // (Si no disparo no hay ninguna bala, y las balas se van quitando a medida que se destruyen)
             for (int i = 0; i < Program.Bullets.Count; i++)
             {
                 Program.Bullets[i].Update();
+            }
+            for (int i = 0; i < Program.Crates.Count; i++)
+            {
+                Program.Crates[i].Update();
             }
         }
 

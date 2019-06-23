@@ -41,6 +41,10 @@ namespace Game
         {
             this.tileset = tileset;
         }
+        public Tile GetTile(int i, int j)
+        {
+            return tiles[i, j];
+        }
 
         public void Initialize()
         {

@@ -61,7 +61,7 @@ namespace Game
             collider =  new Collider(position.X, position.Y, 16, 16, xoffset, yoffset, true, false);
             LoadAnimation();
             currentAnimation = animations[StateMachine.idle_right];
-            activeGun = Program.weapons["pistol"];
+            activeGun = Program.weapons["ak-47"];
         }
 
         private void LoadAnimation()
@@ -79,6 +79,12 @@ namespace Game
         {
             Gravity();
             CollisionTop();
+
+            if (position.Y - collider.SizeY > 600)
+            {
+                position.X = 400;
+                position.Y = 0;
+            }
 
 
             if (TileID(position.X - collider.SizeX + 4, position.Y + collider.SizeY) != -1 || TileID(position.X + collider.SizeX - 4, position.Y + collider.SizeY) != -1)
@@ -140,7 +146,7 @@ namespace Game
         }
 
 
-        void ChangeGun(Gun newGun)
+        public void ChangeGun(Gun newGun)
         {
             activeGun = newGun;
         }
@@ -173,8 +179,11 @@ namespace Game
         {
             if (Engine.GetKey(Keys.Z))
             {
-                activeGun.Reload();
-                isReload = true;
+                if (!isReload && !Engine.GetKey(Keys.X))
+                {
+                    activeGun.Reload();
+                    isReload = true;
+                }
             }
             else
             {
@@ -198,24 +207,26 @@ namespace Game
             {
                 if (activeGun.Automatic)
                 {
-                    activeGun.Shoot();
                     var bullet = bulletsPool.Get();
-                    bullet.Init(position.X, position.Y, face, activeGun.BulletSpeed);
+                    activeGun.Bullet = bullet;
+                    activeGun.Shoot();
+                    activeGun.Bullet.Tilemap = tilemap;
                 }
                 else
                 {
                     if (!isShoot)
                     {
-                        activeGun.Shoot();
                         var bullet = bulletsPool.Get();
-                        bullet.Init(position.X, position.Y, face, activeGun.BulletSpeed);
+                        activeGun.Bullet = bullet;
+                        activeGun.Shoot();
+                        activeGun.Bullet.Tilemap = tilemap;
                         isShoot = true;
                     }
                 }
             }
             else
             {
-                Engine.Debug("Out of Ammo");
+                //Engine.Debug("Out of Ammo");
             }
             
         }

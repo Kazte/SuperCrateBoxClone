@@ -40,20 +40,31 @@
     <Compile Include="Animation.cs" />
     <Compile Include="Bullet.cs" />
     <Compile Include="Collider.cs" />
+    <Compile Include="Crate.cs" />
+    <Compile Include="CrateGenerator.cs" />
+    <Compile Include="PoolCrate.cs" />
     <Compile Include="CustomDelegates.cs" />
     <Compile Include="Enemy.cs" />
+    <Compile Include="EnemyGenerator.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="GameMananger.cs" />
     <Compile Include="GameObject.cs" />
-    <Compile Include="Gun.cs" />
+    <Compile Include="Text.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="weapons\AK.cs" />
+    <Compile Include="weapons\Gun.cs" />
     <Compile Include="Interfaces\IGun.cs" />
     <Compile Include="Interfaces\IRenderizable.cs" />
+    <Compile Include="Interfaces\IScreen.cs" />
     <Compile Include="Interfaces\IUpdateable.cs" />
     <Compile Include="Level1.cs" />
-    <Compile Include="Pistol.cs" />
+    <Compile Include="weapons\Pistol.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerFactory.cs" />
     <Compile Include="PoolBullets.cs" />
+    <Compile Include="PoolEnemies.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="Tilemap.cs" />
@@ -62,42 +73,190 @@
     <Compile Include="Utils.cs" />
     <Compile Include="Vector2D.cs" />
     <Compile Include="WeaponFactory.cs" />
+    <Compile Include="weapons\SMG.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Engine.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="img\sprites\enemy_tiny\death_.png">
+    <Content Include="img\font\0.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="img\sprites\enemy_tiny\idle_1.png">
+    <Content Include="img\font\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="img\sprites\enemy_tiny\idle_2.png">
+    <Content Include="img\font\2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="img\sprites\enemy_tiny\idle_3.png">
+    <Content Include="img\font\3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="img\sprites\enemy_tiny\idle_4.png">
+    <Content Include="img\font\4.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="img\sprites\enemy_tiny\idle_5.png">
+    <Content Include="img\font\5.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="img\sprites\enemy_tiny\idle_6.png">
+    <Content Include="img\font\6.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="img\sprites\enemy_tiny\walk_1.png">
+    <Content Include="img\font\7.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="img\sprites\enemy_tiny\walk_2.png">
+    <Content Include="img\font\8.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="img\sprites\enemy_tiny\walk_3.png">
+    <Content Include="img\font\9.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="img\sprites\enemy_tiny\walk_4.png">
+    <Content Include="img\font\A.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\font\B.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\font\C.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\font\D.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\font\dot.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\font\E.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\font\F.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\font\G.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\font\H.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\font\I.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\font\J.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\font\K.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\font\L.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\font\M.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\font\N.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\font\O.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\font\P.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\font\Q.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\font\R.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\font\S.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\font\space.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\font\T.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\font\U.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\font\V.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\font\W.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\font\X.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\font\Y.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\font\Z.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_tiny\death_left\death0.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_tiny\death_right\death0.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_tiny\idle_left\idle0.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_tiny\idle_left\idle1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_tiny\idle_left\idle2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_tiny\idle_left\idle3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_tiny\idle_left\idle4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_tiny\idle_left\idle5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_tiny\idle_right\idle0.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_tiny\idle_right\idle1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_tiny\idle_right\idle2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_tiny\idle_right\idle3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_tiny\idle_right\idle4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_tiny\idle_right\idle5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_tiny\walk_left\walk0.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_tiny\walk_left\walk1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_tiny\walk_left\walk2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_tiny\walk_left\walk3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_tiny\walk_right\walk0.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_tiny\walk_right\walk1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_tiny\walk_right\walk2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_tiny\walk_right\walk3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="img\sprites\player\idle_left\player_idle1.png">
@@ -236,6 +395,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="img\weapons\bullet.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\weapons\crate.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="img\weapons\weapon_-1.png">

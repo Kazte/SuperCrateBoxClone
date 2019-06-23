@@ -18,6 +18,7 @@ namespace Game
         public string Sprite { get => sprite; set => sprite = value; }
         public Vector2D Position { get => position; set => position = value; }
         public int Id { get => id; set => id = value; }
+        public Collider Collider { get => collider; set => collider = value; }
 
         public Tile(string sprite, Vector2D position, int id = -1)
         {
@@ -25,7 +26,7 @@ namespace Game
             this.position = position;
             this.Id = id;
 
-            collider = new Collider(position.X, position.Y, 32, 32, 16, 16, true, false);
+            Collider = new Collider(position.X, position.Y, 32, 32, 16, 16, true, false);
         }
 
         public Tile(string sprite, int id = -1)
@@ -33,13 +34,13 @@ namespace Game
             this.sprite = sprite;
             this.Id = id;
 
-            collider = new Collider(position.X, position.Y, 32, 32, 16, 16, true, false);
+            Collider = new Collider(position.X, position.Y, 32, 32, 16, 16, true, false);
         }
 
         public void Update()
         {
-            collider.X = position.X;
-            collider.Y = position.Y;
+            Collider.X = position.X;
+            Collider.Y = position.Y;
         }
 
         public void Render()
