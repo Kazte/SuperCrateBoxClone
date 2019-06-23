@@ -11,6 +11,11 @@ namespace Game
         private List<Crate> inUse = new List<Crate>();
         private List<Crate> available = new List<Crate>();
 
+        public int InUseCount()
+        {
+            return inUse.Count;
+        }
+
         public Crate Get()
         {
             Crate crate;

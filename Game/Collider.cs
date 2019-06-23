@@ -37,8 +37,8 @@ namespace Game
 
         float radius;
 
-        float offsetx;
-        float offsety;
+        float offsetX;
+        float offsetY;
 
         float sizeX;
         float sizeY;
@@ -47,11 +47,13 @@ namespace Game
         public float Y { get => y; set => y = value; }
         public float SizeX { get => sizeX; set => sizeX = value; }
         public float SizeY { get => sizeY; set => sizeY = value; }
+        public float OffsetX { get => offsetX; set => offsetX = value; }
+        public float OffsetY { get => offsetY; set => offsetY = value; }
 
-        public Collider(float x, float y, float sizeX, float sizeY, float offsetx, float offsety, bool isCollisionable, bool isCircle)
+        public Collider(float x, float y, float sizeX, float sizeY, float offsetX, float offsetY, bool isCollisionable, bool isCircle)
         {
-            this.offsetx = offsetx;
-            this.offsety = offsety;
+            this.OffsetX = offsetX;
+            this.OffsetY = offsetY;
 
             this.SizeX = sizeX;
             this.SizeY = sizeY;
@@ -75,13 +77,13 @@ namespace Game
 
         private static bool CheckBoxBoxCollision(Collider collisionBox1, Collider collisionBox2)
         {
-            bool collisionMaxX = (collisionBox1.X - collisionBox1.offsetx + collisionBox1.SizeX) > collisionBox2.X - collisionBox2.offsetx;
-            bool collisionMinX = (collisionBox1.X - collisionBox1.offsetx) < (collisionBox2.X - collisionBox2.offsetx + collisionBox2.SizeX);
+            bool collisionMaxX = (collisionBox1.X - collisionBox1.OffsetX + collisionBox1.SizeX) > collisionBox2.X - collisionBox2.OffsetY;
+            bool collisionMinX = (collisionBox1.X - collisionBox1.OffsetX) < (collisionBox2.X - collisionBox2.OffsetX + collisionBox2.SizeX);
 
             bool collisionX = collisionMaxX && collisionMinX;
 
-            bool collisionMaxY = (collisionBox1.Y - collisionBox1.offsety + collisionBox1.SizeY) > collisionBox2.Y - collisionBox2.offsety;
-            bool collisionMinY = (collisionBox1.Y - collisionBox1.offsety) < (collisionBox2.Y - collisionBox2.offsety + collisionBox2.SizeY);
+            bool collisionMaxY = (collisionBox1.Y - collisionBox1.OffsetY + collisionBox1.SizeY) > collisionBox2.Y - collisionBox2.OffsetY;
+            bool collisionMinY = (collisionBox1.Y - collisionBox1.OffsetY) < (collisionBox2.Y - collisionBox2.OffsetY + collisionBox2.SizeY);
 
             bool collisionY = collisionMaxY && collisionMinY;
 
@@ -91,8 +93,8 @@ namespace Game
         private static bool CheckBoxCircleCollision(Collider collisionCircle, Collider collisionBox)
         {
 
-            float deltaX = (collisionCircle.X) - Math.Max(collisionBox.X - collisionBox.offsetx, Math.Min(collisionCircle.X, collisionBox.X - collisionBox.offsetx + collisionBox.SizeX));
-            float deltaY = (collisionCircle.Y) - Math.Max(collisionBox.Y - collisionBox.offsety, Math.Min(collisionCircle.Y, collisionBox.Y - collisionBox.offsety + collisionBox.SizeY));
+            float deltaX = (collisionCircle.X) - Math.Max(collisionBox.X - collisionBox.OffsetX, Math.Min(collisionCircle.X, collisionBox.X - collisionBox.OffsetX + collisionBox.SizeX));
+            float deltaY = (collisionCircle.Y) - Math.Max(collisionBox.Y - collisionBox.OffsetY, Math.Min(collisionCircle.Y, collisionBox.Y - collisionBox.OffsetY + collisionBox.SizeY));
 
 
             return Math.Pow(deltaX, 2) + Math.Pow(deltaY, 2) < Math.Pow(collisionCircle.radius, 2);
@@ -140,15 +142,15 @@ namespace Game
 
         protected void DrawBoxCollider()
         {
-            for (float i = X - offsetx; i < X + offsetx; i++)
+            for (float i = X - OffsetX; i < X + OffsetX; i++)
             {
-                Engine.Draw(pixelSprite, i, Y - offsety);
-                Engine.Draw(pixelSprite, i, Y + offsety);
+                Engine.Draw(pixelSprite, i, Y - OffsetY);
+                Engine.Draw(pixelSprite, i, Y + OffsetY);
             }
-            for (float i = Y - offsety; i < Y + offsety; i++)
+            for (float i = Y - OffsetY; i < Y + OffsetY; i++)
             {
-                Engine.Draw(pixelSprite, X - offsetx, i);
-                Engine.Draw(pixelSprite, X + offsetx, i);
+                Engine.Draw(pixelSprite, X - OffsetX, i);
+                Engine.Draw(pixelSprite, X + OffsetX, i);
             }
         }
 

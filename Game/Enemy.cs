@@ -55,7 +55,7 @@ namespace Game
 
         public Enemy(Vector2D position, float angle) : base(position, angle)
         {
-            Collider = new Collider(position.X, position.Y, 10, 10, 10, 10, true, false);
+            Collider = new Collider(position.X, position.Y, 20, 20, 10, 10, true, false);
             LoadAnimation();
             currentAnimation = animations[StateMachine.idle_right];
             
@@ -89,7 +89,7 @@ namespace Game
             if (!Destroyed)
             {
                 Engine.Draw(Sprite, Position, 1, 1, angle, 16, 16);
-                collider.DrawCollider();
+
                 currentAnimation.Animator();
                 Sprite = currentAnimation.Sprite;
             }
@@ -111,7 +111,7 @@ namespace Game
                 }
             }
 
-            if (position.Y - collider.SizeY > 600)
+            if (position.Y - collider.OffsetY > 600)
             {
                 Desactivate();
             }
@@ -133,7 +133,7 @@ namespace Game
 
         private void Movement()
         {
-            if (TileID(position.X - collider.SizeX + 4, position.Y + collider.SizeY) != -1 || TileID(position.X + collider.SizeX - 4, position.Y + collider.SizeY) != -1)
+            if (TileID(position.X - collider.OffsetX + 4, position.Y + collider.OffsetY) != -1 || TileID(position.X + collider.OffsetX - 4, position.Y + collider.OffsetY) != -1)
             {
                 ground = true;
             }
@@ -164,7 +164,7 @@ namespace Game
         {
             for (int i = 0; i < Math.Abs(xspd); i++)
             {
-                if (TileID(position.X + collider.SizeX, position.Y - collider.SizeY + factor) == -1 && TileID(position.X + collider.SizeX, position.Y + collider.SizeY - factor) == -1)
+                if (TileID(position.X + collider.OffsetX, position.Y - collider.OffsetY + factor) == -1 && TileID(position.X + collider.OffsetX, position.Y + collider.OffsetY - factor) == -1)
                 {
                     position.X += xspd;
                 }
@@ -181,7 +181,7 @@ namespace Game
         {
             for (int i = 0; i < Math.Abs(xspd); i++)
             {
-                if (TileID(position.X - collider.SizeX, position.Y - collider.SizeY + factor) == -1 && TileID(position.X - collider.SizeX, position.Y + collider.SizeY - factor) == -1)
+                if (TileID(position.X - collider.OffsetX, position.Y - collider.OffsetY + factor) == -1 && TileID(position.X - collider.OffsetX, position.Y + collider.OffsetY - factor) == -1)
                 {
                     position.X += xspd;
                 }
@@ -201,7 +201,7 @@ namespace Game
             {
                 if (yspd > 0)
                 {
-                    if (TileID(position.X - collider.SizeX + 4, position.Y + collider.SizeY) != -1 || TileID(position.X + collider.SizeX - 4, position.Y + collider.SizeY) != -1)
+                    if (TileID(position.X - collider.OffsetX + 4, position.Y + collider.OffsetY) != -1 || TileID(position.X + collider.OffsetX - 4, position.Y + collider.OffsetY) != -1)
                     {
                         yspd = 0;
                         break;

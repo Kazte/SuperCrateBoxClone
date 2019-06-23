@@ -58,7 +58,7 @@ namespace Game
             this.xoffset = xoffset;
             this.yoffset = yoffset;
 
-            collider =  new Collider(position.X, position.Y, 16, 16, xoffset, yoffset, true, false);
+            collider =  new Collider(position.X, position.Y, 32, 32, 16, 16, true, false);
             LoadAnimation();
             currentAnimation = animations[StateMachine.idle_right];
             activeGun = Program.weapons["ak-47"];
@@ -80,14 +80,14 @@ namespace Game
             Gravity();
             CollisionTop();
 
-            if (position.Y - collider.SizeY > 600)
+            if (position.Y - collider.OffsetY > 600)
             {
                 position.X = 400;
                 position.Y = 0;
             }
 
 
-            if (TileID(position.X - collider.SizeX + 4, position.Y + collider.SizeY) != -1 || TileID(position.X + collider.SizeX - 4, position.Y + collider.SizeY) != -1)
+            if (TileID(position.X - collider.OffsetX + 4, position.Y + collider.OffsetY) != -1 || TileID(position.X + collider.OffsetX - 4, position.Y + collider.OffsetY) != -1)
             {
                 ground = true;
                 jumping = false;
@@ -139,16 +139,17 @@ namespace Game
 
             xspd = move * Program.DTime * speed;
 
-            
-            
+
+
             //Engine.Debug(jumping);
             //Engine.Debug(String.Format("xSpd: {0}, ySpd: {1}\nMove: {2}\nGround: {3}", xspd, yspd, move, ground));
+            //Engine.Debug(String.Format("x: {0}, y: {1}", position.X, position.Y));
         }
 
 
-        public void ChangeGun(Gun newGun)
+        public void ChangeGun(IGun newGun)
         {
-            activeGun = newGun;
+            activeGun = (Gun)newGun;
         }
 
 
@@ -156,6 +157,7 @@ namespace Game
         public void Render()
         {
             Engine.Draw(Sprite, Position, 1, 1, angle, 16, 16);
+
             activeGun.Render();
             activeGun.Face = face;
             currentAnimation.Animator();
@@ -234,7 +236,7 @@ namespace Game
         private void MoveRight()
         {
             for (int i = 0; i < Math.Abs(xspd); i++) { 
-                if (TileID(position.X + collider.SizeX, position.Y - collider.SizeY + factor) == -1 && TileID(position.X + collider.SizeX, position.Y + collider.SizeY - factor) == -1)
+                if (TileID(position.X + collider.OffsetX, position.Y - collider.OffsetY + factor) == -1 && TileID(position.X + collider.OffsetX, position.Y + collider.OffsetY - factor) == -1)
                 {
                     position.X += xspd;
                 }
@@ -250,7 +252,7 @@ namespace Game
         {
             for (int i = 0; i < Math.Abs(xspd); i++)
             {
-                if (TileID(position.X - collider.SizeX, position.Y - collider.SizeY + factor) == -1 && TileID(position.X - collider.SizeX, position.Y + collider.SizeY - factor) == -1)
+                if (TileID(position.X - collider.OffsetX, position.Y - collider.OffsetY + factor) == -1 && TileID(position.X - collider.OffsetX, position.Y + collider.OffsetY - factor) == -1)
                 {
                     position.X += xspd;
                 }
@@ -267,7 +269,7 @@ namespace Game
             for (int i = 0; i < Math.Abs(yspd); i++)
             {
                 
-                if (TileID(position.X + collider.SizeX - 5, position.Y - collider.SizeY - 6) != -1 || TileID(position.X - collider.SizeX + 5, position.Y - collider.SizeY - 6) != -1)
+                if (TileID(position.X + collider.OffsetX - 5, position.Y - collider.OffsetY - 6) != -1 || TileID(position.X - collider.OffsetX + 5, position.Y - collider.OffsetY - 6) != -1)
                 {
                     if (yspd < -2)
                     {
@@ -284,7 +286,7 @@ namespace Game
             {
                 if (yspd > 0)
                 {
-                    if (TileID(position.X - collider.SizeX + 4, position.Y + collider.SizeY) != -1 || TileID(position.X + collider.SizeX - 4, position.Y + collider.SizeY) != -1)
+                    if (TileID(position.X - collider.OffsetX + 4, position.Y + collider.OffsetY) != -1 || TileID(position.X + collider.OffsetX - 4, position.Y + collider.OffsetY) != -1)
                     {
                         yspd = 0;
                         break;

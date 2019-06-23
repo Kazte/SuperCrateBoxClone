@@ -23,7 +23,7 @@ namespace Game
 
 
         // Weapons
-        public static Dictionary<string, Gun> weapons = new Dictionary<string, Gun>();
+        public static Dictionary<string, Gun> weapons { get; set; } = new Dictionary<string, Gun>();
         public static List<Bullet> Bullets { get; set; } = new List<Bullet>();
         public static List<Enemy> Enemies { get; set; } = new List<Enemy>();
         public static List<Crate> Crates{ get; set; } = new List<Crate>();

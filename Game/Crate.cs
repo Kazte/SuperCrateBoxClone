@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Game.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,10 @@ namespace Game
         Collider collider;
         Player player;
         Tilemap tilemap;
+
+        IGun gun;
+
+        Random rand = new Random();
 
         bool destroyed;
         private float yspd;
@@ -39,6 +44,9 @@ namespace Game
             this.tilemap = tilemap;
             this.player = player;
             Destroyed = false;
+            // Take random weapon
+            gun = Program.weapons.ElementAt(rand.Next(0, Program.weapons.Count)).Value;
+
             Program.Crates.Add(this);
         }
 
@@ -53,19 +61,24 @@ namespace Game
             }
         }
 
-        
+
 
         public void Render()
         {
             Engine.Draw(sprite, position, 1, 1, angle, 12, 12);
+            collider.DrawCollider();
         }
 
         public void Update()
         {
+            collider.X = Position.X;
+            collider.Y = Position.Y;
             Movement();
 
             if (Collider.CheckCollision(collider, player.Collider))
             {
+                Desactivate();
+                player.ChangeGun(gun);
                 GameMananger.Score++;
             }
         }
@@ -76,7 +89,7 @@ namespace Game
             {
                 if (yspd > 0)
                 {
-                    if (TileID(position.X - collider.SizeX + 4, position.Y + collider.SizeY) != -1 || TileID(position.X + collider.SizeX - 4, position.Y + collider.SizeY) != -1)
+                    if (TileID(position.X - collider.OffsetX, position.Y + collider.OffsetY) != -1 || TileID(position.X + collider.OffsetX, position.Y + collider.OffsetY) != -1)
                     {
                         yspd = 0;
                         break;
@@ -101,7 +114,7 @@ namespace Game
 
         private void Movement()
         {
-            if (TileID(position.X - collider.SizeX + 4, position.Y + collider.SizeY) != -1 || TileID(position.X + collider.SizeX - 4, position.Y + collider.SizeY) != -1)
+            if (TileID(position.X - collider.OffsetX, position.Y + collider.OffsetY) != -1 || TileID(position.X + collider.OffsetX - 4, position.Y + collider.OffsetY) != -1)
             {
                 ground = true;
             }

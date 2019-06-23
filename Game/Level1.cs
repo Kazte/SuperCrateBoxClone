@@ -67,7 +67,10 @@ namespace Game
         public void Render()
         {
             tilemap.Render();
-            new Text(GameMananger.Score + "", Program.ScreenWidth / 2, Program.ScreenHeight / 2).drawText();
+
+            string a = GameMananger.Score < 10 ? (a = "0" + GameMananger.Score) : GameMananger.Score.ToString();
+            new Text(a, Program.ScreenWidth / 2 - 20, Program.ScreenHeight / 2).drawText();
+
             player.Render();
 
             for (int i = 0; i < Program.Enemies.Count; i++)
