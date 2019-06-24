@@ -1,4 +1,5 @@
-﻿using Game.weapons;
+﻿using Game.screens;
+using Game.weapons;
 using System;
 using System.Collections.Generic;
 
@@ -20,29 +21,34 @@ namespace Game
         static int MS_PER_FRAME = 30;
         static TimeSpan timeSinceInit;
 
-
+        // Press Space
+        private static bool canPressSpace = true;
 
         // Weapons
         public static Dictionary<string, Gun> weapons { get; set; } = new Dictionary<string, Gun>();
         public static List<Bullet> Bullets { get; set; } = new List<Bullet>();
         public static List<Enemy> Enemies { get; set; } = new List<Enemy>();
-        public static List<Crate> Crates{ get; set; } = new List<Crate>();
+        public static List<Crate> Crates { get; set; } = new List<Crate>();
 
         public static float DTime { get => dTime; set => dTime = value; }
         public static int ScreenHeight { get => screenHeight; set => screenHeight = value; }
         public static int ScreenWidth { get => screenWidth; set => screenWidth = value; }
         internal static Screen ActualScreen { get => actualScreen; set => actualScreen = value; }
+        public static bool CanPressSpace { get => canPressSpace; set => canPressSpace = value; }
+        public static Level1 Level1 { get => level1; set => level1 = value; }
 
+        static MainMenu mainMenu;
         static Level1 level1;
+        static GameOver gameOver;
 
         static void Main(string[] args)
         {
-            
+
 
             Initialize();
-            
 
-            while(true)
+
+            while (true)
             {
                 float start = TimeController();
 
@@ -55,10 +61,14 @@ namespace Game
 
         private static void Initialize()
         {
-            
+
             Engine.Initialize("Game", ScreenWidth, screenHeight);
+            SaveMananger.Instance.LoadCsv();
             LoadWeapons();
-            level1 = new Level1();
+            mainMenu = new MainMenu();
+            Level1 = new Level1();
+            gameOver = new GameOver();
+            actualScreen = Screen.main_menu;
         }
 
         private static void LoadWeapons()
@@ -66,6 +76,7 @@ namespace Game
             weapons.Add("pistol", new Pistol(new Vector2D(0, 0), 0, 10, false, 600));
             weapons.Add("smg", new SMG(new Vector2D(0, 0), 0, 30, true, 650));
             weapons.Add("ak-47", new AK(new Vector2D(0, 0), 0, 60, true, 800));
+            weapons.Add("shotgun", new Shotgun(new Vector2D(0, 0), 0, 7, false, 800));
         }
 
         private static int TimeSleep(float start)
@@ -96,14 +107,46 @@ namespace Game
 
         private static void Update()
         {
-            level1.Update();
+            switch (actualScreen)
+            {
+                case Screen.main_menu:
+                    mainMenu.Update();
+                    break;
+
+                case Screen.level1:
+                    Level1.Update();
+                    break;
+
+                case Screen.game_over:
+                    gameOver.Update();
+                    break;
+
+                default:
+                    break;
+            }
         }
 
         private static void Render()
         {
             Engine.Clear();
 
-            level1.Render();
+            switch (actualScreen)
+            {
+                case Screen.main_menu:
+                    mainMenu.Render();
+                    break;
+
+                case Screen.level1:
+                    Level1.Render();
+                    break;
+
+                case Screen.game_over:
+                    gameOver.Render();
+                    break;
+
+                default:
+                    break;
+            }
 
             Engine.Show();
         }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Game
+﻿namespace Game
 {
     public class Tilemap : IUpdateable
     {
@@ -56,7 +50,7 @@ namespace Game
                     int y = row * 32;
                     if (tiledata[row, col] != -1)
                     {
-                        tiles[row, col] = new Tile(tileset.GetTile(tiledata[row, col]).Sprite, new Vector2D(x + 16, y + 16));   
+                        tiles[row, col] = new Tile(tileset.GetTile(tiledata[row, col]).Sprite, new Vector2D(x + 16, y + 16));
                     }
                 }
             }
@@ -66,7 +60,7 @@ namespace Game
         {
             // Draw Background
             Engine.Draw(spriteBG, 0, 0);
-            
+
             // Draw tiles
             for (int x = 0; x < row; x++)
             {

@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Game.Interfaces;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Game.Interfaces;
 
 namespace Game
 {
     public class Player : GameObject, IRenderizable, IUpdateable
     {
         int move;
+
+        float hp;
+        float hpMax = 5;
 
         float xoffset;
         float yoffset;
@@ -35,6 +35,9 @@ namespace Game
         private PoolBullets bulletsPool = new PoolBullets();
         private Gun activeGun;
 
+        int bombs;
+        bool isBombPress;
+
         bool isShoot;
         bool isReload;
         float timerShoot;
@@ -50,18 +53,60 @@ namespace Game
 
         public Collider Collider { get => collider; set => collider = value; }
         public Tilemap Tilemap { get => tilemap; set => tilemap = value; }
+        internal PoolBullets BulletsPool { get => bulletsPool; set => bulletsPool = value; }
 
         int factor = 10;
+
+        private event SimpleEventHandler<Player> bombAction;
+
+        public event SimpleEventHandler<Player> BombAction
+        {
+            add { bombAction += value; }
+            remove { bombAction -= value; }
+        }
 
         public Player(string initialSprite, Vector2D position, float angle, float xoffset, float yoffset) : base(position, angle)
         {
             this.xoffset = xoffset;
             this.yoffset = yoffset;
 
-            collider =  new Collider(position.X, position.Y, 32, 32, 16, 16, true, false);
+            collider = new Collider(position.X, position.Y, 32, 32, 16, 16, true, false);
             LoadAnimation();
             currentAnimation = animations[StateMachine.idle_right];
-            activeGun = Program.weapons["ak-47"];
+            activeGun = Program.weapons["pistol"];
+            activeGun.Player = this;
+            hp = hpMax;
+            bombs = 3;
+        }
+        public void Render()
+        {
+            Engine.Draw(Sprite, Position, 1, 1, angle, 16, 16);
+
+            // Lifebar
+            Engine.Draw(@"img\sprites\lifeBarBG.png", new Vector2D(20, Program.ScreenHeight - 30), 1, 1, angle, 16, 16);
+            Engine.Draw(@"img\sprites\lifeBar.png", new Vector2D(20, Program.ScreenHeight - 30), (hp / hpMax), 1, angle, 16, 16);
+
+            new Text(activeGun.ToString(), 30, 30, 20, 26).drawText();
+            new Text("bombs " + bombs.ToString(), Program.ScreenWidth - 200, Program.ScreenHeight - 15, 20, 26).drawText();
+            new Text(activeGun.CurrentAmmo.ToString() + " / " + activeGun.MaxAmmo.ToString(), Program.ScreenWidth - 150, 30, 20, 26).drawText();
+
+
+            activeGun.Render();
+            activeGun.Face = face;
+            currentAnimation.Animator();
+            Sprite = currentAnimation.Sprite;
+        }
+        public void Update()
+        {
+            UpdateState();
+            Movement();
+            Weapon();
+
+            currentAnimation = animations[currentState];
+
+            collider.X = Position.X;
+            collider.Y = Position.Y;
+            activeGun.Update(position);
         }
 
         private void LoadAnimation()
@@ -75,10 +120,23 @@ namespace Game
 
         }
 
-        void Movement()
+        private void Movement()
         {
             Gravity();
             CollisionTop();
+
+            if (Engine.GetKey(Keys.A))
+            {
+                if (!isBombPress && bombs > 0)
+                {
+                    BombExplosion();
+                    isBombPress = true;
+                }
+            }
+            else
+            {
+                isBombPress = false;
+            }
 
             if (position.Y - collider.OffsetY > 600)
             {
@@ -126,7 +184,7 @@ namespace Game
                 face = move;
                 MoveRight();
             }
-            else if(Engine.GetKey(Keys.LEFT))
+            else if (Engine.GetKey(Keys.LEFT))
             {
                 move = -1;
                 face = move;
@@ -146,36 +204,6 @@ namespace Game
             //Engine.Debug(String.Format("x: {0}, y: {1}", position.X, position.Y));
         }
 
-
-        public void ChangeGun(IGun newGun)
-        {
-            activeGun = (Gun)newGun;
-        }
-
-
-
-        public void Render()
-        {
-            Engine.Draw(Sprite, Position, 1, 1, angle, 16, 16);
-
-            activeGun.Render();
-            activeGun.Face = face;
-            currentAnimation.Animator();
-            Sprite = currentAnimation.Sprite;
-        }
-
-        public void Update()
-        {
-            UpdateState();
-            Movement();
-            Weapon();
-
-            currentAnimation = animations[currentState];
-
-            collider.X = Position.X;
-            collider.Y = Position.Y;
-            activeGun.Update(position);
-        }
 
         private void Weapon()
         {
@@ -202,40 +230,28 @@ namespace Game
             }
             timerShoot += Program.DTime;
         }
-
         private void Shoot()
         {
             if (activeGun.CurrentAmmo > 0 && timerShoot >= timeToShoot)
             {
                 if (activeGun.Automatic)
                 {
-                    var bullet = bulletsPool.Get();
-                    activeGun.Bullet = bullet;
                     activeGun.Shoot();
-                    activeGun.Bullet.Tilemap = tilemap;
                 }
                 else
                 {
                     if (!isShoot)
                     {
-                        var bullet = bulletsPool.Get();
-                        activeGun.Bullet = bullet;
                         activeGun.Shoot();
-                        activeGun.Bullet.Tilemap = tilemap;
                         isShoot = true;
                     }
                 }
             }
-            else
-            {
-                //Engine.Debug("Out of Ammo");
-            }
-            
         }
-
         private void MoveRight()
         {
-            for (int i = 0; i < Math.Abs(xspd); i++) { 
+            for (int i = 0; i < Math.Abs(xspd); i++)
+            {
                 if (TileID(position.X + collider.OffsetX, position.Y - collider.OffsetY + factor) == -1 && TileID(position.X + collider.OffsetX, position.Y + collider.OffsetY - factor) == -1)
                 {
                     position.X += xspd;
@@ -247,7 +263,6 @@ namespace Game
                 }
             }
         }
-
         private void MoveLeft()
         {
             for (int i = 0; i < Math.Abs(xspd); i++)
@@ -263,12 +278,11 @@ namespace Game
                 }
             }
         }
-
         private void CollisionTop()
         {
             for (int i = 0; i < Math.Abs(yspd); i++)
             {
-                
+
                 if (TileID(position.X + collider.OffsetX - 5, position.Y - collider.OffsetY - 6) != -1 || TileID(position.X - collider.OffsetX + 5, position.Y - collider.OffsetY - 6) != -1)
                 {
                     if (yspd < -2)
@@ -279,7 +293,6 @@ namespace Game
                 }
             }
         }
-
         private void Gravity()
         {
             for (int i = 0; i < Math.Abs(yspd); i++)
@@ -294,7 +307,7 @@ namespace Game
                 }
                 position.Y += yspd * Program.DTime;
             }
-            
+
         }
 
         private int TileID(float x, float y)
@@ -345,5 +358,36 @@ namespace Game
             }
         }
 
+        public void TakeDamage()
+        {
+            if (hp > 1)
+            {
+                hp--;
+            }
+            else
+            {
+                Program.ActualScreen = Screen.game_over;
+                if (GameMananger.Score > GameMananger.HighScore)
+                {
+                    GameMananger.HighScore = GameMananger.Score;
+                    SaveMananger.Instance.SaveCsv();
+                }
+            }
+        }
+
+        public void ChangeGun(IGun newGun)
+        {
+            activeGun = (Gun)newGun;
+            activeGun.Player = this;
+            activeGun.Reload();
+        }
+        public void BombExplosion()
+        {
+            bombs--;
+            if (Program.Enemies.Count > 0)
+            {
+                bombAction(this);
+            }
+        }
     }
 }

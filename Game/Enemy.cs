@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game
 {
@@ -10,7 +7,7 @@ namespace Game
     {
 
         public event SimpleEventHandler<Enemy> OnDeactivate;
-        
+
 
 
         int hp;
@@ -50,6 +47,7 @@ namespace Game
             this.player = player;
             currentAnimation = animations[StateMachine.idle_right];
             Destroyed = false;
+            player.BombAction += new SimpleEventHandler<Player>(DestroyWithBomb);
             Program.Enemies.Add(this);
         }
 
@@ -58,7 +56,12 @@ namespace Game
             Collider = new Collider(position.X, position.Y, 20, 20, 10, 10, true, false);
             LoadAnimation();
             currentAnimation = animations[StateMachine.idle_right];
-            
+
+        }
+
+        public void DestroyWithBomb(Player player)
+        {
+            Desactivate();
         }
 
         private void LoadAnimation()
@@ -89,7 +92,6 @@ namespace Game
             if (!Destroyed)
             {
                 Engine.Draw(Sprite, Position, 1, 1, angle, 16, 16);
-
                 currentAnimation.Animator();
                 Sprite = currentAnimation.Sprite;
             }
@@ -107,7 +109,8 @@ namespace Game
             {
                 if (Collider.CheckCollision(player.Collider, collider))
                 {
-                    Program.ActualScreen = Screen.game_over;
+                    player.TakeDamage();
+                    Desactivate();
                 }
             }
 

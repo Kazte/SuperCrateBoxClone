@@ -7,7 +7,6 @@ namespace Game
         private float velocity = 300f;
         private float lifeTime = 3f;
         private float timer;
-        int face;
         Tilemap tilemap;
 
         public event SimpleEventHandler<Bullet> OnDeactivate;
@@ -21,7 +20,7 @@ namespace Game
         public float Radius { get; set; }
         public Tilemap Tilemap { get => tilemap; set => tilemap = value; }
 
-        public Bullet(Vector2D position, float angle) : base(position, angle)    
+        public Bullet(Vector2D position, float angle) : base(position, angle)
         {
             collider = new Collider(position.X, position.Y, 8, 8, 4, 4, true, true);
         }
@@ -30,8 +29,7 @@ namespace Game
         {
             position.X = x;
             position.Y = y;
-            this.face = face;
-            this.velocity = speed;
+            velocity = speed;
             this.Tilemap = Tilemap;
             this.angle = angle;
 
@@ -59,15 +57,14 @@ namespace Game
             }
             else if (!Destroyed)
             {
-                
+
                 timer += Program.DTime;
                 Movement();
                 CheckCollisions();
             }
         }
 
-        // Funcion de destruir la bala, la saca de la lista de balas del Program
-        private void Desactivate()
+        public void Desactivate()
         {
             Destroyed = true;
             Program.Bullets.Remove(this);

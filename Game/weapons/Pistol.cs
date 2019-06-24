@@ -1,11 +1,4 @@
-﻿using Game.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Game
+﻿namespace Game
 {
     public class Pistol : Gun
     {
@@ -19,14 +12,18 @@ namespace Game
             CurrentAmmo--;
             if (Face == 1)
             {
-                Bullet.Init(position.X, position.Y, Face, BulletSpeed, 0);
+                var bullet = Player.BulletsPool.Get();
+                bullet.Tilemap = Player.Tilemap;
+                bullet.Init(position.X, position.Y, Face, BulletSpeed, 0);
             }
             else
             {
-                Bullet.Init(position.X, position.Y, Face, BulletSpeed, 180);
+                var bullet = Player.BulletsPool.Get();
+                bullet.Tilemap = Player.Tilemap;
+                bullet.Init(position.X, position.Y, Face, BulletSpeed, 180);
             }
-            
-            
+
+
         }
 
         public override void Render()

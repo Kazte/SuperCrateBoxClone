@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game
 {
@@ -47,6 +44,10 @@ namespace Game
                 else if (c.Equals('.'))
                 {
                     charTextures.Add(Engine.GetTexture("img/font/dot.png"));
+                }
+                else if (c.Equals('/'))
+                {
+                    charTextures.Add(Engine.GetTexture("img/font/slash.png"));
                 }
                 else
                 {

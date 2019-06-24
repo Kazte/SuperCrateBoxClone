@@ -1,9 +1,4 @@
 ﻿using Game.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game
 {
@@ -17,7 +12,7 @@ namespace Game
             this.bulletSpeed = bulletSpeed;
 
         }
-
+        Player player;
         Bullet bullet;
 
         int maxAmmo;
@@ -26,7 +21,7 @@ namespace Game
 
         int bulletSpeed;
 
-        
+
 
         int face;
 
@@ -36,21 +31,21 @@ namespace Game
         public int Face { get => face; set => face = value; }
         public int BulletSpeed { get => bulletSpeed; set => bulletSpeed = value; }
         public Bullet Bullet { get => bullet; set => bullet = value; }
+        public Player Player { get => player; set => player = value; }
 
         public void Reload()
         {
             CurrentAmmo = MaxAmmo;
-            Engine.Debug(ToString() + "Reload");
         }
 
         public virtual void Render()
         {
-            
+
         }
 
         public virtual void Shoot()
         {
-            
+
 
         }
 

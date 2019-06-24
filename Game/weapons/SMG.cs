@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game.weapons
 {
@@ -16,15 +12,19 @@ namespace Game.weapons
         public override void Shoot()
         {
             Random random = new Random();
-            
+
             CurrentAmmo--;
             if (Face == 1)
             {
-                Bullet.Init(position.X, position.Y, Face, BulletSpeed, random.Next(-2, 2));
+                var bullet = Player.BulletsPool.Get();
+                bullet.Tilemap = Player.Tilemap;
+                bullet.Init(position.X, position.Y, Face, BulletSpeed, random.Next(-5, 5));
             }
             else
             {
-                Bullet.Init(position.X, position.Y, Face, BulletSpeed, random.Next(178, 182));
+                var bullet = Player.BulletsPool.Get();
+                bullet.Tilemap = Player.Tilemap;
+                bullet.Init(position.X, position.Y, Face, BulletSpeed, random.Next(175, 185));
             }
         }
 

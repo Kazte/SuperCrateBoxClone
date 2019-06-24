@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game.weapons
 {
@@ -19,11 +15,15 @@ namespace Game.weapons
             CurrentAmmo--;
             if (Face == 1)
             {
-                Bullet.Init(position.X, position.Y, Face, BulletSpeed, random.Next(-10, 10));
+                var bullet = Player.BulletsPool.Get();
+                bullet.Tilemap = Player.Tilemap;
+                bullet.Init(position.X, position.Y, Face, BulletSpeed, random.Next(-10, 10));
             }
             else
             {
-                Bullet.Init(position.X, position.Y, Face, BulletSpeed, random.Next(170, 190));
+                var bullet = Player.BulletsPool.Get();
+                bullet.Tilemap = Player.Tilemap;
+                bullet.Init(position.X, position.Y, Face, BulletSpeed, random.Next(170, 190));
             }
         }
 

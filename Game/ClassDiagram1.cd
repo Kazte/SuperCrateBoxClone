@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Game.Animation" Collapsed="true">
+    <Position X="19.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAACAAAAAAAAAAAAAAABABABAQAQAYAABASAAAQ=</HashCode>
+      <FileName>Animation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Bullet">
+    <Position X="12" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Events" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQIAAAAMAAAQAAABACIAAAggAAAAACAABQCEAAAAIA=</HashCode>
+      <FileName>Bullet.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Left" Position="0.1" />
+  </Class>
+  <Class Name="Game.Collider" Collapsed="true">
+    <Position X="21.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAACEQCgADAAIAAAIAQAAAEAIDAEADgABAAYAA=</HashCode>
+      <FileName>Collider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Crate">
+    <Position X="17.25" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQQAIhAAAAIAAAEBAAIAAAgiBCAAAARABACkAAAAIA=</HashCode>
+      <FileName>Crate.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Left" Position="0.1" />
+  </Class>
+  <Class Name="Game.CrateGenerator" Collapsed="true">
+    <Position X="23" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAkAAABAAQAAQAAAAAAAAAgAAAAAABAAQAAAAAAAA=</HashCode>
+      <FileName>CrateGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Enemy">
+    <Position X="14.5" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Events" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AASQAAgAAAAIQgAEJAAIAgAgiASAEAAbQBRCtAAAQIA=</HashCode>
+      <FileName>Enemy.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Left" Position="0.113" />
+  </Class>
+  <Class Name="Game.EnemyGenerator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="24.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEAAAAAAQAAAAAAAAAAABgAAAAAADAAQAAAQAAAA=</HashCode>
+      <FileName>EnemyGenerator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Game.Texture" Collapsed="true">
+    <Position X="26.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAGAAAABAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Engine" Collapsed="true">
+    <Position X="26.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAACAEAAA4AAIAAAAAQAAAgFAAAAAAAAABBAAAA=</HashCode>
+      <FileName>Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.GameMananger" Collapsed="true">
+    <Position X="19.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAoAAAAIABAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>GameMananger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.GameObject" Collapsed="true">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAIAAAABAAAAAQAAAAAABAAAA=</HashCode>
+      <FileName>GameObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Level1" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAABAAEAAAAAAAAAAAAAEAgAAAAAABIBAACACAAAA=</HashCode>
+      <FileName>Level1.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Game.Player">
+    <Position X="1.25" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Events" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>QCSQABgAgAAIRgCENACAQhAAyASAEUgcRBjo9AAAACA=</HashCode>
+      <FileName>Player.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Left" Position="0.127" />
+  </Class>
+  <Class Name="Game.PlayerFactory" Collapsed="true">
+    <Position X="23" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PlayerFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.PoolBullets" Collapsed="true">
+    <Position X="24.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>JAAAAAAAAAAAAABAAEAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>PoolBullets.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.PoolCrate" Collapsed="true">
+    <Position X="26.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>JAAAAAAAAAAAAABAAEAAAAAAIAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>PoolCrate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.PoolEnemies" Collapsed="true">
+    <Position X="19.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>JAAAAAAAAAAAAABAAEAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>PoolEnemies.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Program" Collapsed="true">
+    <Position X="21.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAICGEBAARhAAAAAAIAAEAFQEAMBEBABVAAABIA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.SaveMananger" Collapsed="true">
+    <Position X="23" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQEAAIAABAAAAAAAAAAKAIAAAABABAABQAAAAAAAAAA=</HashCode>
+      <FileName>SaveMananger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Text" Collapsed="true">
+    <Position X="24.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAABABAAEQAQAAAAAACAAAAAAACACBoAAAAAAA=</HashCode>
+      <FileName>Text.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Tile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAAAAAAAAAAgAAAAIAAAABAAAAAQABAAEAAAAgA=</HashCode>
+      <FileName>Tile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Game.Tilemap" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ARQAACAAAAAACQAAAIAAAQACAgEAAggAIBAIAAAAAAA=</HashCode>
+      <FileName>Tilemap.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Game.Tileset" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQQAAAAAAAAAAAAAAAAAAAAAAgAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Tileset.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Game.TitleScreen" Collapsed="true">
+    <Position X="24.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TitleScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Utils" Collapsed="true">
+    <Position X="26.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAABAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Vector2D" Collapsed="true">
+    <Position X="9.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEEAQFIABAg0AAAABAAABkAAACYBA=</HashCode>
+      <FileName>Vector2D.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Gun">
+    <Position X="6.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAAAAgAEAABABEAAAABAgQAAQIEAABCBAAAQAQAAA=</HashCode>
+      <FileName>weapons\Gun.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Left" Position="0.1" />
+  </Class>
+  <Class Name="Game.Pistol">
+    <Position X="4.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>weapons\Pistol.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.screens.Button" Collapsed="true">
+    <Position X="8.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAgBgAAAAAAAAAAJAACACQABAAAIACQAA=</HashCode>
+      <FileName>screens\Button.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Left" Position="0.1" />
+  </Class>
+  <Class Name="Game.screens.GameOver" Collapsed="true">
+    <Position X="9" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAEAAAAAIAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>screens\GameOver.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.screens.Indicator" Collapsed="true">
+    <Position X="10.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAABAAQAAQABAAAAAAAAA=</HashCode>
+      <FileName>screens\Indicator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Right" Position="0.1" />
+  </Class>
+  <Class Name="Game.screens.MainMenu" Collapsed="true">
+    <Position X="6.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAIAAAAAAAAAAAAAAAABAAAAAgAAA=</HashCode>
+      <FileName>screens\MainMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.screens.Pantalla" Collapsed="true">
+    <Position X="7.75" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAABAAAAAAAAAIAAAAAQAAIAAAAAAABAAAAAQAAA=</HashCode>
+      <FileName>screens\Pantalla.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.weapons.AK">
+    <Position X="4.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>weapons\AK.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.weapons.Shotgun">
+    <Position X="9" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>weapons\Shotgun.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.weapons.SMG">
+    <Position X="9" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>weapons\SMG.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Game.IRenderizable" Collapsed="true">
+    <Position X="21.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQABAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IRenderizable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Game.IUpdateable" Collapsed="true">
+    <Position X="24.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IUpdateable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Game.Interfaces.IGun" Collapsed="true">
+    <Position X="19.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAABAAAAAAAAAAAAAAIEAAACAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IGun.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Game.Interfaces.IScreen" Collapsed="true">
+    <Position X="23" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IScreen.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Game.StateMachine" Collapsed="true">
+    <Position X="23" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAQAAAgAAAAAAACAAAAAAAQIQAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Game.Screen" Collapsed="true">
+    <Position X="21.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAAAAAAEAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Game.Keys" Collapsed="true">
+    <Position X="19.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>8MQDbASRIoIAW6i0OAH+8Q2kogMqEAs64QBg////Zwc=</HashCode>
+      <FileName>Game.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Delegate Name="Game.DrawColliderDelegate" Collapsed="true">
+    <Position X="19.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Collider.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Game.SimpleEventHandler&lt;T&gt;" Collapsed="true">
+    <Position X="21.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomDelegates.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Game.SimpleEventHandler&lt;T0, T1&gt;" Collapsed="true">
+    <Position X="23" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>CustomDelegates.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Game.SimpleEventHandler&lt;T0, T1, T2&gt;" Collapsed="true">
+    <Position X="24.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAgAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>CustomDelegates.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

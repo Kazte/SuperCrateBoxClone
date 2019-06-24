@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game
 {
@@ -25,10 +21,21 @@ namespace Game
 
         public void ResetLevel(int tilemapRow, int tilemapCol)
         {
+            GameMananger.Score = 0;
+
+            for (int i = 0; i < Program.Enemies.Count; i++)
+            {
+                Program.Enemies[i].Desactivate();
+            }
+            for (int i = 0; i < Program.Crates.Count; i++)
+            {
+                Program.Crates[i].Desactivate();
+            }
+
             tileset = new Tileset(LoadTileset(11, "img/tileset/Level1/tileset_lvl1_"));
             tilemap = new Tilemap(tilemapCol, tilemapRow, 32, tileset, "img/tileset/background_lvl1.png");
             SetMap();
-            player = PlayerFactory.CreatePlayer(new Vector2D(400, 5), tilemap);
+            player = PlayerFactory.CreatePlayer(new Vector2D(400, 200), tilemap);
             generator = new EnemyGenerator(tilemap, player);
             crates = new CrateGenerator(tilemap, player);
         }
@@ -70,6 +77,7 @@ namespace Game
 
             string a = GameMananger.Score < 10 ? (a = "0" + GameMananger.Score) : GameMananger.Score.ToString();
             new Text(a, Program.ScreenWidth / 2 - 20, Program.ScreenHeight / 2).drawText();
+
 
             player.Render();
 

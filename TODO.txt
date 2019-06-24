@@ -1,2 +1,0 @@
-- Gestionar posicion de creacion de "Crates"
-- Colision y suma de puntos

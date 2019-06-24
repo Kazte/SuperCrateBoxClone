@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Game
+﻿namespace Game
 {
     public class GameObject
     {
@@ -17,17 +11,17 @@ namespace Game
         protected Vector2D position;
         protected float angle;
 
-        
 
-        public GameObject (Vector2D position, float angle)
+
+        public GameObject(Vector2D position, float angle)
         {
             this.Position = position;
             this.angle = angle;
         }
 
-        
 
-        
+
+
 
     }
 }

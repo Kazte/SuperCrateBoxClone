@@ -1,9 +1,6 @@
 ﻿using Game.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game
 {
@@ -66,7 +63,7 @@ namespace Game
         public void Render()
         {
             Engine.Draw(sprite, position, 1, 1, angle, 12, 12);
-            collider.DrawCollider();
+
         }
 
         public void Update()

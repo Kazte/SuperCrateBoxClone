@@ -50,6 +50,12 @@
     <Compile Include="Game.cs" />
     <Compile Include="GameMananger.cs" />
     <Compile Include="GameObject.cs" />
+    <Compile Include="SaveMananger.cs" />
+    <Compile Include="screens\Button.cs" />
+    <Compile Include="screens\GameOver.cs" />
+    <Compile Include="screens\Indicator.cs" />
+    <Compile Include="screens\MainMenu.cs" />
+    <Compile Include="screens\Pantalla.cs" />
     <Compile Include="Text.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
@@ -72,11 +78,14 @@
     <Compile Include="TitleScreen.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Vector2D.cs" />
-    <Compile Include="WeaponFactory.cs" />
+    <Compile Include="weapons\Shotgun.cs" />
     <Compile Include="weapons\SMG.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Engine.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\exitBtn.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="img\font\0.png">
@@ -169,6 +178,9 @@
     <Content Include="img\font\S.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="img\font\slash.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="img\font\space.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -191,6 +203,21 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="img\font\Z.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\gameoverScreen.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\mainScreen.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\newGameBtn.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\resetBtn.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\selector.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="img\sprites\enemy_tiny\death_left\death0.png">
@@ -257,6 +284,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="img\sprites\enemy_tiny\walk_right\walk3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\lifeBar.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\lifeBarBG.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="img\sprites\player\idle_left\player_idle1.png">
@@ -439,6 +472,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="maps\Lvl1.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
