@@ -42,9 +42,13 @@
     <Compile Include="Collider.cs" />
     <Compile Include="Crate.cs" />
     <Compile Include="CrateGenerator.cs" />
+    <Compile Include="enemies\Enemy.cs" />
+    <Compile Include="enemies\EnemyTiny.cs" />
+    <Compile Include="factory\EnemyFactory.cs" />
+    <Compile Include="factory\PlayerFactory.cs" />
+    <Compile Include="Level2.cs" />
     <Compile Include="PoolCrate.cs" />
     <Compile Include="CustomDelegates.cs" />
-    <Compile Include="Enemy.cs" />
     <Compile Include="EnemyGenerator.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Game.cs" />
@@ -68,7 +72,6 @@
     <Compile Include="Level1.cs" />
     <Compile Include="weapons\Pistol.cs" />
     <Compile Include="Player.cs" />
-    <Compile Include="PlayerFactory.cs" />
     <Compile Include="PoolBullets.cs" />
     <Compile Include="PoolEnemies.cs" />
     <Compile Include="Program.cs" />
@@ -220,6 +223,18 @@
     <Content Include="img\selector.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="img\sprites\enemy_bomb\walk_left\left0.png" />
+    <Content Include="img\sprites\enemy_bomb\walk_left\left1.png" />
+    <Content Include="img\sprites\enemy_bomb\walk_left\left2.png" />
+    <Content Include="img\sprites\enemy_bomb\walk_left\left3.png" />
+    <Content Include="img\sprites\enemy_bomb\walk_left\left4.png" />
+    <Content Include="img\sprites\enemy_bomb\walk_left\left5.png" />
+    <Content Include="img\sprites\enemy_bomb\walk_right\right0.png" />
+    <Content Include="img\sprites\enemy_bomb\walk_right\right1.png" />
+    <Content Include="img\sprites\enemy_bomb\walk_right\right2.png" />
+    <Content Include="img\sprites\enemy_bomb\walk_right\right3.png" />
+    <Content Include="img\sprites\enemy_bomb\walk_right\right4.png" />
+    <Content Include="img\sprites\enemy_bomb\walk_right\right5.png" />
     <Content Include="img\sprites\enemy_tiny\death_left\death0.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -481,13 +496,18 @@
     <Content Include="img\weapons\weapon_5.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="maps\Lvl2..csv" />
-    <Content Include="maps\Lvl2.tmx" />
+    <Content Include="maps\Lvl2..csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="maps\Lvl2.tmx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="ship.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="pools" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>

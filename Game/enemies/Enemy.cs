@@ -11,41 +11,48 @@ namespace Game
 
 
         int hp;
-        int initHP = 5;
+        protected int initHP;
 
-        Collider collider;
+        protected Collider collider;
 
-        Dictionary<StateMachine, Animation> animations = new Dictionary<StateMachine, Animation>();
-        Animation currentAnimation;
+        protected Dictionary<StateMachine, Animation> animations = new Dictionary<StateMachine, Animation>();
+        protected Animation currentAnimation;
 
-        StateMachine currentState = StateMachine.idle_right;
-        private int face;
-        private int velocity;
-        private Tilemap tilemap;
-        private float yspd;
-        private float xspd;
+        protected StateMachine currentState = StateMachine.idle_right;
+        protected int face;
+        protected int velocity;
+        protected Tilemap tilemap;
+        protected float yspd;
+        protected float xspd;
 
-        int factor = 10;
-        private bool ground;
-        private float gravity = 1.5f;
-        private float yspdMax = 30;
+        protected int factor = 10;
+        protected bool ground;
+        protected float gravity = 1.5f;
+        protected float yspdMax = 30;
 
+        protected int offsetX;
+        protected int offsetY;
+        
         Player player;
 
-        public bool Destroyed { get; private set; }
+        public bool Destroyed { get; protected set; }
         public Collider Collider { get => collider; set => collider = value; }
         public int Hp { get => hp; set => hp = value; }
 
-        public void Init(float x, float y, int face, int speed, Tilemap tilemap, Player player)
+        public void Init(float x, float y, int face, int speed, float sizeX, float sizeY, Tilemap _tilemap, Player player)
         {
             position.X = x;
             position.Y = y;
+            collider.SizeX = sizeX;
+            collider.SizeY = sizeY;
+            offsetX = (int) (sizeX / 2);
+            offsetY = (int) (sizeY / 2);
             this.face = face;
             this.velocity = speed;
-            this.tilemap = tilemap;
+            this.tilemap = _tilemap;
             hp = initHP;
             this.player = player;
-            currentAnimation = animations[StateMachine.idle_right];
+            currentAnimation = animations[StateMachine.walk_right];
             Destroyed = false;
             player.BombAction += new SimpleEventHandler<Player>(DestroyWithBomb);
             Program.Enemies.Add(this);
@@ -56,23 +63,16 @@ namespace Game
             Collider = new Collider(position.X, position.Y, 20, 20, 10, 10, true, false);
             LoadAnimation();
             currentAnimation = animations[StateMachine.idle_right];
-
         }
 
-        public void DestroyWithBomb(Player player)
+        protected void DestroyWithBomb(Player player)
         {
             Desactivate();
         }
 
-        private void LoadAnimation()
+        protected virtual void LoadAnimation()
         {
-            animations.Add(StateMachine.idle_right, new Animation("img/sprites/enemy_tiny/idle_right", true));
-            animations.Add(StateMachine.idle_left, new Animation("img/sprites/enemy_tiny/idle_left", true));
-            animations.Add(StateMachine.walk_right, new Animation("img/sprites/enemy_tiny/walk_right", true));
-            animations.Add(StateMachine.walk_left, new Animation("img/sprites/enemy_tiny/walk_left", true));
-            animations.Add(StateMachine.death_right, new Animation("img/sprites/enemy_tiny/death_right", true));
-            animations.Add(StateMachine.death_left, new Animation("img/sprites/enemy_tiny/death_left", true));
-
+            
         }
 
         public void TakeDamage()
@@ -91,7 +91,7 @@ namespace Game
         {
             if (!Destroyed)
             {
-                Engine.Draw(Sprite, Position, 1, 1, angle, 16, 16);
+                Engine.Draw(Sprite, Position, 1, 1, angle, offsetX, offsetY);
                 currentAnimation.Animator();
                 Sprite = currentAnimation.Sprite;
             }
@@ -102,7 +102,6 @@ namespace Game
             UpdateState();
             collider.X = position.X;
             collider.Y = position.Y;
-
             currentAnimation = animations[currentState];
 
             if (player != null)
@@ -119,44 +118,20 @@ namespace Game
                 Desactivate();
             }
 
-            Movement();
+            Behaviour();
         }
 
-        private void UpdateState()
+        protected virtual void UpdateState()
         {
-            currentState = face == 1 ? StateMachine.walk_right : StateMachine.walk_left;
+            
         }
 
-        private void Movement()
+        protected virtual void Behaviour()
         {
-            if (TileID(position.X - collider.OffsetX + 4, position.Y + collider.OffsetY) != -1 || TileID(position.X + collider.OffsetX - 4, position.Y + collider.OffsetY) != -1)
-            {
-                ground = true;
-            }
-            else
-            {
-                ground = false;
-            }
-            if (!ground)
-            {
-                yspd = Utils.Focus(yspd, yspdMax, gravity);
-            }
-
-            if (face == 1)
-            {
-                MoveRight();
-            }
-            else
-            {
-                MoveLeft();
-            }
-
-            xspd = face * Program.DTime * velocity;
-
-            Gravity();
+         
         }
 
-        private void MoveRight()
+        protected void MoveRight()
         {
             for (int i = 0; i < Math.Abs(xspd); i++)
             {
@@ -173,7 +148,7 @@ namespace Game
             }
         }
 
-        private void MoveLeft()
+        protected void MoveLeft()
         {
             for (int i = 0; i < Math.Abs(xspd); i++)
             {
@@ -191,7 +166,7 @@ namespace Game
         }
 
 
-        private void Gravity()
+        protected void Gravity()
         {
             for (int i = 0; i < Math.Abs(yspd); i++)
             {
@@ -209,7 +184,7 @@ namespace Game
         }
 
 
-        private int TileID(float x, float y)
+        protected int TileID(float x, float y)
         {
             int row = (int)(y / 32);
             int col = (int)(x / 32);

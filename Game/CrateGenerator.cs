@@ -14,11 +14,11 @@ namespace Game
 
         float min = 2f;
         float max = 6f;
-        Random random = new Random();
+        
 
         List<Vector2D> createPositions;
 
-        // TODO: Se generen en lugares random
+        // TODO: Se generen en lugares Program.random
 
         public CrateGenerator(Tilemap tilemap, Player player)
         {
@@ -39,7 +39,7 @@ namespace Game
             timer -= Program.DTime;
             if (timer < 0 && cratePool.InUseCount() < 2)
             {
-                timer = (float)Math.Floor(random.NextDouble() * (max - min + 1) + min);
+                timer = (float)Math.Floor(Program.random.NextDouble() * (max - min + 1) + min);
                 GenerateCrate();
             }
         }
@@ -47,7 +47,7 @@ namespace Game
         private void GenerateCrate()
         {
             var crate = cratePool.Get();
-            Vector2D position = createPositions[random.Next(createPositions.Count)];
+            Vector2D position = createPositions[Program.random.Next(createPositions.Count)];
             crate.Init(position.X, position.Y, tilemap, player);
         }
     }

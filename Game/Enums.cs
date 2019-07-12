@@ -1,6 +1,6 @@
 ﻿namespace Game
 {
-    enum StateMachine
+    public enum StateMachine
     {
         idle_left,
         idle_right,
@@ -12,10 +12,11 @@
         death_right
     }
 
-    enum Screen
+    public enum Screen
     {
         main_menu,
         level1,
+        level2,
         game_over
     }
 }

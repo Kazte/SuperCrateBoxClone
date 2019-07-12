@@ -55,11 +55,11 @@ namespace Game
 
             if (random.NextDouble() > 0.5f)
             {
-                enemy.Init(400, 0, 1, random.Next(100, 120), tilemap, player);
+                enemy.Init(400, 0, 1, random.Next(100, 120), 20, 20, tilemap, player);
             }
             else
             {
-                enemy.Init(400, 0, -1, random.Next(100, 120), tilemap, player);
+                enemy.Init(400, 0, -1, random.Next(100, 120), 20, 20, tilemap, player);
             }
         }
     }

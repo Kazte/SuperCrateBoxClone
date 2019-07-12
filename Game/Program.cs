@@ -7,6 +7,9 @@ namespace Game
 {
     public class Program
     {
+        
+        // Random
+        public static Random random = new Random();
 
         // Screen
         static int screenWidth = 800;
@@ -36,9 +39,11 @@ namespace Game
         internal static Screen ActualScreen { get => actualScreen; set => actualScreen = value; }
         public static bool CanPressSpace { get => canPressSpace; set => canPressSpace = value; }
         public static Level1 Level1 { get => level1; set => level1 = value; }
+        public static Level2 Level2 { get => level2; set => level2 = value; }
 
         static MainMenu mainMenu;
         static Level1 level1;
+        static Level2 level2;
         static GameOver gameOver;
 
         static void Main(string[] args)
@@ -67,8 +72,9 @@ namespace Game
             LoadWeapons();
             mainMenu = new MainMenu();
             Level1 = new Level1();
+            level2 = new Level2();
             gameOver = new GameOver();
-            actualScreen = Screen.main_menu;
+            actualScreen = Screen.level2;
         }
 
         private static void LoadWeapons()
@@ -117,6 +123,10 @@ namespace Game
                     Level1.Update();
                     break;
 
+                case Screen.level2:
+                    Level2.Update();
+                    break;
+                
                 case Screen.game_over:
                     gameOver.Update();
                     break;
@@ -138,6 +148,10 @@ namespace Game
 
                 case Screen.level1:
                     Level1.Render();
+                    break;
+                
+                case Screen.level2:
+                    Level2.Render();
                     break;
 
                 case Screen.game_over:
