@@ -124,14 +124,7 @@ namespace Game
 
         private void UpdateState()
         {
-            if (face == 1)
-            {
-                currentState = StateMachine.walk_right;
-            }
-            else
-            {
-                currentState = StateMachine.walk_left;
-            }
+            currentState = face == 1 ? StateMachine.walk_right : StateMachine.walk_left;
         }
 
         private void Movement()

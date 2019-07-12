@@ -160,7 +160,7 @@ namespace Game
                 yspd = Utils.Focus(yspd, yspdMax, gravity);
             }
 
-            if (Engine.GetKey(Keys.SPACE))
+            if (Engine.GetKey(Keys.LSHIFT))
             {
                 if (!isSpacePressed && ground)
                 {
@@ -207,9 +207,9 @@ namespace Game
 
         private void Weapon()
         {
-            if (Engine.GetKey(Keys.Z))
+            if (Engine.GetKey(Keys.X))
             {
-                if (!isReload && !Engine.GetKey(Keys.X))
+                if (!isReload && !Engine.GetKey(Keys.Z))
                 {
                     activeGun.Reload();
                     isReload = true;
@@ -220,7 +220,7 @@ namespace Game
                 isReload = false;
             }
 
-            if (Engine.GetKey(Keys.X))
+            if (Engine.GetKey(Keys.Z))
             {
                 Shoot();
             }

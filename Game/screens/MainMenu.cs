@@ -32,9 +32,10 @@ namespace Game.screens
         {
             base.Render();
             new Text("high score " + GameMananger.HighScore, Program.ScreenWidth / 2 - 50, Program.ScreenHeight - 30, 20, 27).drawText();
-            new Text("x shoot", 30, 300, 15, 20).drawText();
-            new Text("z reload", 30, 325, 15, 20).drawText();
+            new Text("z shoot", 30, 300, 15, 20).drawText();
+            new Text("x reload", 30, 325, 15, 20).drawText();
             new Text("a bombs", 30, 350, 15, 20).drawText();
+            new Text("left shift jump", 30, 375, 15, 20).drawText();
         }
 
         public override void EnterButton()
