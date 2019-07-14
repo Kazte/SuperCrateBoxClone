@@ -31,7 +31,7 @@ namespace Game
 
         public Crate(Vector2D position, float angle) : base(position, angle)
         {
-            Collider = new Collider(position.X, position.Y, 24, 24, 12, 12, true, false);
+            Collider = new Collider(position.X, position.Y, 24, 24, true, false);
         }
 
         public void Init(float x, float y, Tilemap tilemap, Player player)

@@ -70,7 +70,7 @@ namespace Game
             this.xoffset = xoffset;
             this.yoffset = yoffset;
 
-            collider = new Collider(position.X, position.Y, 32, 32, 16, 16, true, false);
+            collider = new Collider(position.X, position.Y, 32, 32, true, false);
             LoadAnimation();
             currentAnimation = animations[StateMachine.idle_right];
             activeGun = Program.weapons["pistol"];

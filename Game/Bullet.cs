@@ -22,7 +22,7 @@ namespace Game
 
         public Bullet(Vector2D position, float angle) : base(position, angle)
         {
-            collider = new Collider(position.X, position.Y, 8, 8, 4, 4, true, true);
+            collider = new Collider(position.X, position.Y, 8, 8, true, true);
         }
 
         public void Init(float x, float y, int face, int speed, float angle)
@@ -69,10 +69,7 @@ namespace Game
             Destroyed = true;
             Program.Bullets.Remove(this);
 
-            if (OnDeactivate != null)
-            {
-                OnDeactivate.Invoke(this);
-            }
+            OnDeactivate?.Invoke(this);
         }
 
         private void Movement()
@@ -101,9 +98,10 @@ namespace Game
                 }
             }
 
-            for (int i = 0; i < Program.Enemies.Count; i++)
+            for (var index = 0; index < Program.Enemies.Count; index++)
             {
-                CheckCollision(Program.Enemies[i]);
+                var enemy = Program.Enemies[index];
+                CheckCollision(enemy);
             }
         }
 

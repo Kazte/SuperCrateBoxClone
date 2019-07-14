@@ -47,6 +47,8 @@
     <Compile Include="factory\EnemyFactory.cs" />
     <Compile Include="factory\PlayerFactory.cs" />
     <Compile Include="Level2.cs" />
+    <Compile Include="Level3.cs" />
+    <Compile Include="level\Level.cs" />
     <Compile Include="PoolCrate.cs" />
     <Compile Include="CustomDelegates.cs" />
     <Compile Include="EnemyGenerator.cs" />
@@ -60,6 +62,7 @@
     <Compile Include="screens\Indicator.cs" />
     <Compile Include="screens\MainMenu.cs" />
     <Compile Include="screens\Pantalla.cs" />
+    <Compile Include="screens\SelectLevel.cs" />
     <Compile Include="Text.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
@@ -73,7 +76,6 @@
     <Compile Include="weapons\Pistol.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PoolBullets.cs" />
-    <Compile Include="PoolEnemies.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="Tilemap.cs" />
@@ -86,6 +88,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Engine.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\btnLvl1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\btnLvl2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\btnLvl3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="img\exitBtn.png">
@@ -218,6 +229,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="img\resetBtn.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\selectLevel_bg.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="img\selector.png">
@@ -400,6 +414,12 @@
     <Content Include="img\tileset\background_lvl1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="img\tileset\background_lvl2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\tileset\background_lvl3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="img\tileset\Level1\tileset_lvl1_0.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -454,6 +474,45 @@
     <Content Include="img\tileset\Level2\tileset_lvl2_5.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="img\tileset\Level3\tileset_lvl2_0.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\tileset\Level3\tileset_lvl2_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\tileset\Level3\tileset_lvl2_10.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\tileset\Level3\tileset_lvl2_11.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\tileset\Level3\tileset_lvl2_12.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\tileset\Level3\tileset_lvl2_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\tileset\Level3\tileset_lvl2_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\tileset\Level3\tileset_lvl2_4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\tileset\Level3\tileset_lvl2_5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\tileset\Level3\tileset_lvl2_6.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\tileset\Level3\tileset_lvl2_7.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\tileset\Level3\tileset_lvl2_8.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\tileset\Level3\tileset_lvl2_9.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="img\utils\default.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -496,10 +555,13 @@
     <Content Include="img\weapons\weapon_5.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="maps\Lvl2..csv">
+    <Content Include="maps\Lvl2.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="maps\Lvl2.tmx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="maps\Lvl3.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ship.png">

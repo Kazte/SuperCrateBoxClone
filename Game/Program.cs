@@ -7,7 +7,6 @@ namespace Game
 {
     public class Program
     {
-        
         // Random
         public static Random random = new Random();
 
@@ -28,34 +27,39 @@ namespace Game
         private static bool canPressSpace = true;
 
         // Weapons
-        public static Dictionary<string, Gun> weapons { get; set; } = new Dictionary<string, Gun>();
-        public static List<Bullet> Bullets { get; set; } = new List<Bullet>();
-        public static List<Enemy> Enemies { get; set; } = new List<Enemy>();
-        public static List<Crate> Crates { get; set; } = new List<Crate>();
+        public static Dictionary<string, Gun> weapons{ get; set; } = new Dictionary<string, Gun>();
+        public static List<Bullet> Bullets{ get; set; } = new List<Bullet>();
+        public static List<Enemy> Enemies{ get; set; } = new List<Enemy>();
+        public static List<Crate> Crates{ get; set; } = new List<Crate>();
 
-        public static float DTime { get => dTime; set => dTime = value; }
-        public static int ScreenHeight { get => screenHeight; set => screenHeight = value; }
-        public static int ScreenWidth { get => screenWidth; set => screenWidth = value; }
-        internal static Screen ActualScreen { get => actualScreen; set => actualScreen = value; }
-        public static bool CanPressSpace { get => canPressSpace; set => canPressSpace = value; }
-        public static Level1 Level1 { get => level1; set => level1 = value; }
-        public static Level2 Level2 { get => level2; set => level2 = value; }
+        public static float DTime{ get => dTime; set => dTime = value; }
+        public static int ScreenHeight{ get => screenHeight; set => screenHeight = value; }
+        public static int ScreenWidth{ get => screenWidth; set => screenWidth = value; }
+        internal static Screen ActualScreen{ get => actualScreen; set => actualScreen = value; }
+        public static bool CanPressSpace{ get => canPressSpace; set => canPressSpace = value; }
+        public static Level1 Level1{ get => level1; set => level1 = value; }
+        public static Level2 Level2{ get => level2; set => level2 = value; }
+        public static Level3 Level3{ get => level3; set => level3 = value; }
 
-        static MainMenu mainMenu;
-        static Level1 level1;
-        static Level2 level2;
-        static GameOver gameOver;
+        private static MainMenu mainMenu;
+        private static SelectLevel selectLevel;
+        private static Level1 level1;
+        private static Level2 level2;
+        private static Level3 level3;
+        private static GameOver gameOver;
 
         static void Main(string[] args)
         {
-
-
             Initialize();
 
 
             while (true)
             {
                 float start = TimeController();
+                if (!Engine.GetKey(Keys.SPACE))
+                {
+                    canPressSpace = true;
+                }
 
                 Update();
                 Render();
@@ -66,15 +70,16 @@ namespace Game
 
         private static void Initialize()
         {
-
             Engine.Initialize("Game", ScreenWidth, screenHeight);
             SaveMananger.Instance.LoadCsv();
             LoadWeapons();
             mainMenu = new MainMenu();
+            selectLevel = new SelectLevel();
             Level1 = new Level1();
             level2 = new Level2();
+            level3 = new Level3();
             gameOver = new GameOver();
-            actualScreen = Screen.level2;
+            actualScreen = Screen.main_menu;
         }
 
         private static void LoadWeapons()
@@ -99,7 +104,7 @@ namespace Game
         private static float TimeController()
         {
             timeSinceInit = DateTime.Now - timeInit;
-            float start = (float)timeSinceInit.TotalSeconds;
+            float start = (float) timeSinceInit.TotalSeconds;
             dTime = start - timeLastFrame;
             timeLastFrame = start;
             return start;
@@ -108,7 +113,7 @@ namespace Game
         static float GetCurrentTime()
         {
             TimeSpan diffStart = DateTime.Now.Subtract(timeInit);
-            return (float)diffStart.TotalMilliseconds;
+            return (float) diffStart.TotalMilliseconds;
         }
 
         private static void Update()
@@ -118,6 +123,10 @@ namespace Game
                 case Screen.main_menu:
                     mainMenu.Update();
                     break;
+                
+                case Screen.select_level:
+                    selectLevel.Update();
+                    break;
 
                 case Screen.level1:
                     Level1.Update();
@@ -126,7 +135,11 @@ namespace Game
                 case Screen.level2:
                     Level2.Update();
                     break;
-                
+
+                case Screen.level3:
+                    Level3.Update();
+                    break;
+
                 case Screen.game_over:
                     gameOver.Update();
                     break;
@@ -146,12 +159,20 @@ namespace Game
                     mainMenu.Render();
                     break;
 
+                case Screen.select_level:
+                    selectLevel.Render();
+                    break;
+                
                 case Screen.level1:
                     Level1.Render();
                     break;
-                
+
                 case Screen.level2:
                     Level2.Render();
+                    break;
+
+                case Screen.level3:
+                    Level3.Render();
                     break;
 
                 case Screen.game_over:
@@ -165,5 +186,4 @@ namespace Game
             Engine.Show();
         }
     }
-
 }

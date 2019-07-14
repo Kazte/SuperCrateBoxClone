@@ -38,7 +38,7 @@ namespace Game.screens
             if (buttonCurrent == buttonRestart)
             {
                 Program.Level1.ResetLevel(25, 19);
-                Program.ActualScreen = Screen.level1;
+                Program.ActualScreen = Screen.select_level;
             }
             else if (buttonCurrent == buttonExit)
             {

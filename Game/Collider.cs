@@ -67,7 +67,7 @@ namespace Game
             set => offsetY = value;
         }
 
-        public Collider(float x, float y, float sizeX, float sizeY, float offsetX, float offsetY, bool isCollisionable,
+        public Collider(float x, float y, float sizeX, float sizeY, bool isCollisionable,
             bool isCircle)
         {
             this.SizeX = sizeX;

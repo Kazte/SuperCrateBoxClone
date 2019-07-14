@@ -5,11 +5,11 @@ namespace Game
 {
     public class Level2 : IUpdateable
     {
-
         Tileset tileset;
         Tilemap tilemap;
 
         Player player;
+        
 
         EnemyGenerator generator;
         CrateGenerator crates;
@@ -23,26 +23,30 @@ namespace Game
         {
             GameMananger.Score = 0;
 
-            for (int i = 0; i < Program.Enemies.Count; i++)
+            for (var index = 0; index < Program.Enemies.Count; index++)
             {
-                Program.Enemies[i].Desactivate();
-            }
-            for (int i = 0; i < Program.Crates.Count; i++)
-            {
-                Program.Crates[i].Desactivate();
+                var enemy = Program.Enemies[index];
+                enemy.Destroy();
             }
 
-            tileset = new Tileset(LoadTileset(11, "img/tileset/Level1/tileset_lvl2_"));
-            tilemap = new Tilemap(tilemapCol, tilemapRow, 32, tileset, "img/tileset/background_lvl1.png");
-            SetMap();
-            //player = PlayerFactory.CreatePlayer(new Vector2D(400, 200), tilemap);
-            //generator = new EnemyGenerator(tilemap, player);
-            //crates = new CrateGenerator(tilemap, player);
+
+            for (var index = 0; index < Program.Crates.Count; index++)
+            {
+                var crate = Program.Crates[index];
+                crate.Desactivate();
+            }
+
+            tileset = new Tileset(LoadTileset(5, "img/tileset/Level2/tileset_lvl2_"));
+            tilemap = new Tilemap(tilemapCol, tilemapRow, 32, tileset, "img/tileset/background_lvl2.png");
+            SetMap("maps/Lvl2.csv");
+            player = PlayerFactory.CreatePlayer(new Vector2D(400, 200), tilemap);
+            generator = new EnemyGenerator(tilemap, player);
+            crates = new CrateGenerator(tilemap, player);
         }
 
-        private void SetMap()
+        private void SetMap(string mapPath)
         {
-            StreamReader sr = new StreamReader("maps/Lvl2.csv");
+            StreamReader sr = new StreamReader(mapPath);
             string strResult = sr.ReadToEnd();
             string[] arrayResult = strResult.Split(',');
             int tileid;
@@ -68,6 +72,7 @@ namespace Game
                 tilesaux.Add(new Tile(path, new Vector2D(0, 0), i));
                 Engine.Debug("Load texture: " + path);
             }
+
             return tilesaux;
         }
 
@@ -81,17 +86,23 @@ namespace Game
 
             player.Render();
 
-            for (int i = 0; i < Program.Enemies.Count; i++)
+            for (var index = 0; index < Program.Enemies.Count; index++)
             {
-                Program.Enemies[i].Render();
+                var enemy = Program.Enemies[index];
+                enemy.Render();
             }
-            for (int i = 0; i < Program.Bullets.Count; i++)
+
+
+            for (var index = 0; index < Program.Bullets.Count; index++)
             {
-                Program.Bullets[i].Render();
+                var bullet = Program.Bullets[index];
+                bullet.Render();
             }
-            for (int i = 0; i < Program.Crates.Count; i++)
+
+            for (var index = 0; index < Program.Crates.Count; index++)
             {
-                Program.Crates[i].Render();
+                var crate = Program.Crates[index];
+                crate.Render();
             }
         }
 
@@ -101,19 +112,23 @@ namespace Game
             player.Update();
             generator.Update();
             crates.Update();
-            for (int i = 0; i < Program.Enemies.Count; i++)
+            for (var i = 0; i < Program.Enemies.Count; i++)
             {
-                Program.Enemies[i].Update();
+                var enemy = Program.Enemies[i];
+                enemy.Update();
             }
-            for (int i = 0; i < Program.Bullets.Count; i++)
+
+            for (var i = 0; i < Program.Bullets.Count; i++)
             {
-                Program.Bullets[i].Update();
+                var bullet = Program.Bullets[i];
+                bullet.Update();
             }
-            for (int i = 0; i < Program.Crates.Count; i++)
+
+            for (var i = 0; i < Program.Crates.Count; i++)
             {
-                Program.Crates[i].Update();
+                var crate = Program.Crates[i];
+                crate.Update();
             }
         }
-
     }
 }

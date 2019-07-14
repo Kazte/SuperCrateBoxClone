@@ -4,7 +4,6 @@ namespace Game
 {
     public class EnemyGenerator : IUpdateable
     {
-        private PoolEnemies enemiesPool = new PoolEnemies();
         Player player;
 
         Tilemap tilemap;
@@ -15,7 +14,6 @@ namespace Game
 
         float min = 1f;
         float max = 6f;
-        Random random = new Random();
 
         public EnemyGenerator(Tilemap tilemap, Player player)
         {
@@ -28,7 +26,7 @@ namespace Game
             timer -= Program.DTime;
             if (timer < 0)
             {
-                timer = (float)Math.Floor(random.NextDouble() * (max - min + 1) + min);
+                timer = (float)Math.Floor(Program.random.NextDouble() * (max - min + 1) + min);
                 GenerateEnemy();
             }
 
@@ -51,16 +49,8 @@ namespace Game
 
         private void GenerateEnemy()
         {
-            var enemy = enemiesPool.Get();
-
-            if (random.NextDouble() > 0.5f)
-            {
-                enemy.Init(400, 0, 1, random.Next(100, 120), 20, 20, tilemap, player);
-            }
-            else
-            {
-                enemy.Init(400, 0, -1, random.Next(100, 120), 20, 20, tilemap, player);
-            }
+            var enemy = EnemyFactory.CreateEnemy(new Vector2D(400, 0), tilemap, player);
+            Program.Enemies.Add(enemy);
         }
     }
 }

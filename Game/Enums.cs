@@ -15,8 +15,10 @@
     public enum Screen
     {
         main_menu,
+        select_level,
         level1,
         level2,
+        level3,
         game_over
     }
 }

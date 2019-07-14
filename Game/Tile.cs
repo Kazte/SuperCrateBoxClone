@@ -20,7 +20,7 @@
             this.position = position;
             this.Id = id;
 
-            Collider = new Collider(position.X, position.Y, 32, 32, 16, 16, true, false);
+            Collider = new Collider(position.X, position.Y, 32, 32, true, false);
         }
 
         public Tile(string sprite, int id = -1)
@@ -28,7 +28,7 @@
             this.sprite = sprite;
             this.Id = id;
 
-            Collider = new Collider(position.X, position.Y, 32, 32, 16, 16, true, false);
+            Collider = new Collider(position.X, position.Y, 32, 32, true, false);
         }
 
         public void Update()
@@ -41,7 +41,7 @@
         {
 
             Engine.Draw(sprite, position, 1, 1, 0, 16, 16);
-            //collider.DrawCollider();
+//            collider.DrawCollider();
         }
     }
 }
