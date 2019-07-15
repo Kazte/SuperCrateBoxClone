@@ -44,8 +44,7 @@ namespace Game
             LoadAnimation();
             this.tilemap = tilemap;
             currentAnimation = animations[StateMachine.walk_left];
-            face = Program.random.Next() > 0.5f ? 1 : -1;
-            face = 1;
+            face = Program.random.NextDouble() > 0.5f ? 1 : -1;
             player.BombAction += new SimpleEventHandler<Player>(DestroyWithBomb);
         }
 
