@@ -44,6 +44,7 @@ namespace Game.screens
             {
                 Environment.Exit(1);
             }
+            Program.CanPressSpace = false;
         }
     }
 }

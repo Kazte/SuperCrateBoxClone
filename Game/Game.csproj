@@ -43,19 +43,21 @@
     <Compile Include="Crate.cs" />
     <Compile Include="CrateGenerator.cs" />
     <Compile Include="enemies\Enemy.cs" />
+    <Compile Include="enemies\EnemyBomb.cs" />
+    <Compile Include="enemies\EnemyRed.cs" />
     <Compile Include="enemies\EnemyTiny.cs" />
     <Compile Include="factory\EnemyFactory.cs" />
     <Compile Include="factory\PlayerFactory.cs" />
     <Compile Include="Level2.cs" />
     <Compile Include="Level3.cs" />
     <Compile Include="level\Level.cs" />
-    <Compile Include="PoolCrate.cs" />
     <Compile Include="CustomDelegates.cs" />
     <Compile Include="EnemyGenerator.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameMananger.cs" />
     <Compile Include="GameObject.cs" />
+    <Compile Include="pools\Pool.cs" />
     <Compile Include="SaveMananger.cs" />
     <Compile Include="screens\Button.cs" />
     <Compile Include="screens\GameOver.cs" />
@@ -75,7 +77,6 @@
     <Compile Include="Level1.cs" />
     <Compile Include="weapons\Pistol.cs" />
     <Compile Include="Player.cs" />
-    <Compile Include="PoolBullets.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="Tilemap.cs" />
@@ -237,18 +238,72 @@
     <Content Include="img\selector.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="img\sprites\enemy_bomb\walk_left\left0.png" />
-    <Content Include="img\sprites\enemy_bomb\walk_left\left1.png" />
-    <Content Include="img\sprites\enemy_bomb\walk_left\left2.png" />
-    <Content Include="img\sprites\enemy_bomb\walk_left\left3.png" />
-    <Content Include="img\sprites\enemy_bomb\walk_left\left4.png" />
-    <Content Include="img\sprites\enemy_bomb\walk_left\left5.png" />
-    <Content Include="img\sprites\enemy_bomb\walk_right\right0.png" />
-    <Content Include="img\sprites\enemy_bomb\walk_right\right1.png" />
-    <Content Include="img\sprites\enemy_bomb\walk_right\right2.png" />
-    <Content Include="img\sprites\enemy_bomb\walk_right\right3.png" />
-    <Content Include="img\sprites\enemy_bomb\walk_right\right4.png" />
-    <Content Include="img\sprites\enemy_bomb\walk_right\right5.png" />
+    <Content Include="img\sprites\enemy_bomb\walk_left\left2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_bomb\walk_left\left3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_bomb\walk_left\left4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_bomb\walk_left\left5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_bomb\walk_left\left6.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_bomb\walk_left\left7.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_bomb\walk_right\righ1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_bomb\walk_right\righ2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_bomb\walk_right\righ3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_bomb\walk_right\righ4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_bomb\walk_right\righ5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_bomb\walk_right\righ6.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_red\walk_left\walk_left1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_red\walk_left\walk_left2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_red\walk_left\walk_left3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_red\walk_left\walk_left4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_red\walk_left\walk_left5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_red\walk_right\walk_right1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_red\walk_right\walk_right2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_red\walk_right\walk_right3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_red\walk_right\walk_right4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\sprites\enemy_red\walk_right\walk_right5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="img\sprites\enemy_tiny\death_left\death0.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -569,7 +624,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="pools" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>

@@ -2,14 +2,13 @@
 
 namespace Game
 {
-    public class Bullet : GameObject, IUpdateable, IRenderizable
+    public class Bullet : GameObject, IUpdateable, IRenderizable, IPooleable<Bullet>
     {
         private float velocity = 300f;
         private float lifeTime = 3f;
         private float timer;
         Tilemap tilemap;
-
-        public event SimpleEventHandler<Bullet> OnDeactivate;
+        public event SimpleEventHandler<Bullet> OnDesactivate;
 
 
         Collider collider;
@@ -19,10 +18,9 @@ namespace Game
         public bool Destroyed { get; set; }
         public float Radius { get; set; }
         public Tilemap Tilemap { get => tilemap; set => tilemap = value; }
-
-        public Bullet(Vector2D position, float angle) : base(position, angle)
+        public Bullet()
         {
-            collider = new Collider(position.X, position.Y, 8, 8, true, true);
+            
         }
 
         public void Init(float x, float y, int face, int speed, float angle)
@@ -36,6 +34,7 @@ namespace Game
             timer = 0;
             Destroyed = false;
             Program.Bullets.Add(this);
+            collider = new Collider(position.X, position.Y, 8, 8, true, true);
         }
 
         public void Render()
@@ -69,7 +68,7 @@ namespace Game
             Destroyed = true;
             Program.Bullets.Remove(this);
 
-            OnDeactivate?.Invoke(this);
+            OnDesactivate?.Invoke(this);
         }
 
         private void Movement()
@@ -80,8 +79,7 @@ namespace Game
             position.X += dirX * velocity * Program.DTime;
             position.Y += dirY * velocity * Program.DTime;
         }
-
-        // Funcion de chequear colisiones con enemigos
+        
         private void CheckCollisions()
         {
             for (int i = 0; i < Tilemap.Tiledata.GetLength(0); i++)

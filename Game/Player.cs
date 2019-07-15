@@ -1,6 +1,7 @@
 ﻿using Game.Interfaces;
 using System;
 using System.Collections.Generic;
+using Game.pools;
 
 namespace Game
 {
@@ -32,7 +33,7 @@ namespace Game
         bool jumping;
 
 
-        private PoolBullets bulletsPool = new PoolBullets();
+        private Pool<Bullet> bulletsPool = new Pool<Bullet>();
         private Gun activeGun;
 
         int bombs;
@@ -53,7 +54,7 @@ namespace Game
 
         public Collider Collider { get => collider; set => collider = value; }
         public Tilemap Tilemap { get => tilemap; set => tilemap = value; }
-        internal PoolBullets BulletsPool { get => bulletsPool; set => bulletsPool = value; }
+        internal Pool<Bullet> BulletsPool { get => bulletsPool; set => bulletsPool = value; }
 
         int factor = 10;
 

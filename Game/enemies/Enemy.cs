@@ -74,7 +74,7 @@ namespace Game
         {
             Engine.Draw(Sprite, Position, 1, 1, angle, offsetX, offsetY);
             currentAnimation.Animator();
-            collider.DrawCollider();
+//            collider.DrawCollider();
             Sprite = currentAnimation.Sprite;
         }
 

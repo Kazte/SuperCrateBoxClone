@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Game
 {
-    public class Crate : GameObject, IUpdateable, IRenderizable
+    public class Crate : GameObject, IUpdateable, IRenderizable, IPooleable<Crate>
     {
 
         string sprite = @"img\weapons\crate.png";
@@ -22,14 +22,19 @@ namespace Game
         private float gravity = 1.5f;
         private float yspdMax = 30;
 
-        public event SimpleEventHandler<Crate> OnDeactivate;
-
+        public event SimpleEventHandler<Crate> OnDesactivate;
+        
         public string Sprite { get => sprite; set => sprite = value; }
         public Collider Collider { get => collider; set => collider = value; }
         public bool Destroyed { get => destroyed; set => destroyed = value; }
 
 
         public Crate(Vector2D position, float angle) : base(position, angle)
+        {
+            Collider = new Collider(position.X, position.Y, 24, 24, true, false);
+        }
+
+        public Crate()
         {
             Collider = new Collider(position.X, position.Y, 24, 24, true, false);
         }
@@ -41,6 +46,7 @@ namespace Game
             this.tilemap = tilemap;
             this.player = player;
             Destroyed = false;
+            
             // Take random weapon
             gun = Program.weapons.ElementAt(rand.Next(0, Program.weapons.Count)).Value;
 
@@ -52,13 +58,8 @@ namespace Game
             Destroyed = true;
             Program.Crates.Remove(this);
 
-            if (OnDeactivate != null)
-            {
-                OnDeactivate.Invoke(this);
-            }
+            OnDesactivate?.Invoke(this);
         }
-
-
 
         public void Render()
         {

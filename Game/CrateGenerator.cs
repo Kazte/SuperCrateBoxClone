@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Game.pools;
 
 namespace Game
 {
     public class CrateGenerator
     {
-        private PoolCrate cratePool = new PoolCrate();
+        private Pool<Crate> cratePool = new Pool<Crate>();
         Player player;
 
         Tilemap tilemap;
@@ -17,8 +18,6 @@ namespace Game
         
 
         List<Vector2D> createPositions;
-
-        // TODO: Se generen en lugares Program.random
 
         public CrateGenerator(Tilemap tilemap, Player player)
         {
@@ -37,7 +36,7 @@ namespace Game
         public void Update()
         {
             timer -= Program.DTime;
-            if (timer < 0 && cratePool.InUseCount() < 2)
+            if (timer < 0 && cratePool.InUse.Count < 2)
             {
                 timer = (float)Math.Floor(Program.random.NextDouble() * (max - min + 1) + min);
                 GenerateCrate();
